@@ -11,7 +11,7 @@ import imagen from '../../GlobalStyles/images/image1.png';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Importar los estilos del carrusel
 
-import './carrousell.css';
+
 
 import img1 from '../../GlobalStyles/images/carrousell/1.png';
 import img2 from '../../GlobalStyles/images/carrousell/2.png';
@@ -21,10 +21,7 @@ import img5 from '../../GlobalStyles/images/carrousell/5.png';
 import img6 from '../../GlobalStyles/images/carrousell/6.png';
 import img7 from '../../GlobalStyles/images/carrousell/7.png';
 
-
-import NewMenuApplication from '../NuevoMenu/NuevoMenu';
-
-const MenuApplication = () => {
+const NewMenuApplication = () => {
     const routeLocation = useLocation();
     const ID = routeLocation.state && routeLocation.state.ID_PERSONAL;
     const Rol = routeLocation.state && routeLocation.state.Rol;
@@ -102,7 +99,38 @@ const MenuApplication = () => {
     return (
         <body>
             <div className="left-panel">
-            <NewMenuApplication/>
+                <img src={logo} className='logo' />
+                <div className='contTitleLeft' >
+                    <label className='labelPanelLeft'>Menu </label>
+                    <div className='line'></div>
+                </div>
+                <div className='contMenu' >
+                <div className='optionBtn' onClick={GoUserAdmin}>
+                        <label className='txtBTN'>Admin</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoUser}>
+                        <label className='txtBTN'>Usuarios</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoPsicologia}>
+                        <label className='txtBTN'>Psicología</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoEnfermeria}>
+                        <label className='txtBTN'>Enfermería</label>
+                    </div>
+
+                    <div className='optionBtn' onClick={GoTalleres}>
+                        <label className='txtBTN'>Talleres</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoEstadistica}>
+                        <label className='txtBTN'>Estadística general</label>
+                    </div>
+                    <div className='optionBtn' onClick={GoLogOut}>
+                        <label className='txtBTN'>Cerrar sesión</label>
+                    </div>
+                </div>
+                <div className='contentImage'>
+                    <img src={""} className='imagen' />
+                </div>
             </div>
 
 
@@ -120,40 +148,7 @@ const MenuApplication = () => {
 
                     </div>
 
-                    <div className='table_container'>
-                        <h1 className='titleForm'>Tu rol es {Rol} </h1>
-                        <Carousel autoPlay={true} interval={10000} infiniteLoop={true}>
-                            <div>
-                                <img src={img1} alt="Imagen 1" />
-
-                            </div>
-                            <div>
-                                <img src={img2} alt="Imagen 2" />
-
-                            </div>
-                            <div>
-                                <img src={img3} alt="Imagen 3" />
-
-                            </div>
-                            <div>
-                                <img src={img4} alt="Imagen 4" />
-
-                            </div>
-                            <div>
-                                <img src={img5} alt="Imagen 5" />
-
-                            </div>
-                            <div>
-                                <img src={img6} alt="Imagen 6" />
-
-                            </div>
-                            <div>
-                                <img src={img7} alt="Imagen 7" />
-
-                            </div>
-
-                        </Carousel>
-                    </div>
+         
                 </div>
             </div>
 
@@ -162,4 +157,4 @@ const MenuApplication = () => {
     );
 };
 
-export default MenuApplication;
+export default NewMenuApplication;

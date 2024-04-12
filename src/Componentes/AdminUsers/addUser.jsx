@@ -18,6 +18,8 @@ import './styleAdd.css';
 import logo from '../../GlobalStyles/images/logo.svg';
 import imagen from '../../GlobalStyles/images/image1.png';
 
+import NewMenuApplication from '../NuevoMenu/NuevoMenu';
+
 const Formulario = () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
@@ -40,6 +42,7 @@ const Formulario = () => {
 
   const navigate = useNavigate();
 
+  const GetCID = localStorage.getItem('CID');
   //////////////////////////////////////////////////////////////---------------> Function para construir PDF
   const handleDownloadPDF = async () => {
     // Crear un nuevo documento PDF
@@ -161,6 +164,7 @@ const Formulario = () => {
   const handleSubmit = () => {
     // Envía los datos al servidor
     // Crear un objeto con los datos del formulario
+    
     const formData = {
       PersonalID,
       Rol,
@@ -240,7 +244,7 @@ const Formulario = () => {
       setAcceso('ÁREA DE ENFERMERÍA');
     } else if (selectedRol === 'Instructor') {
       setAcceso('ÁREA DE TALLERES Y ACTIVIDADES');
-    } else if (selectedRol === 'Administración') {
+    } else if (selectedRol === 'Administrador') {
       setAcceso('TODAS LAS ÁREAS');
     } else if (selectedRol === 'Recepción') {
       setAcceso('ÁREA DE REGISTRO DE USUARIOS');
@@ -303,20 +307,7 @@ const Formulario = () => {
   return (
     <body>
       <div className="left-panel">
-        <img src={logo} className='logo' />
-        <div className='contTitleLeft' >
-          <label className='labelPanelLeft'>Agregar personal</label>
-          <div className='line'></div>
-        </div>
-        <div className='contMenu' >
-          <div className='optionBtn' onClick={Menu}>
-            <label className='txtBTN'>Volver al menú</label>
-          </div>
-
-        </div>
-        <div className='contentImage'>
-        <img src={""} className='imagen' />
-        </div>
+      <NewMenuApplication/>
       </div>
 
 
@@ -333,23 +324,11 @@ const Formulario = () => {
                   <option value="Psicología">Psicóloga/o</option>
                   <option value="Enfermería">Enfermera/o</option>
                   <option value="Instructor">Instructora/or</option>
-                  <option value="Administración">Administradora/or</option>
-                  <option value="Recepción">Recepcionista</option>
+                  <option value="Administrador">Administradora/or</option>
+        
                 </select>
               </div>
 
-              <div className='containerInputLabel'>
-                <label className='labelInput'>Elige un centro:</label>
-
-                <select class="inputGlobal" value={ID_Centro} onChange={e => setCentroId(e.target.value.split(" - ")[0])} required>
-                  <option disabled selected value="">Seleccionar centro</option>
-                  {centros.map(centro => (
-                    <option key={centro.ID_Centro} value={centro.ID_Centro}>
-                      {centro.ID_Centro} - {centro.Nombre}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               <div className='containerInputLabel'>
                 <label className='labelInput'>Ingresa un correo electrónico:</label>

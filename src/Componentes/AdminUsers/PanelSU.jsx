@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import backendUrl from '../../serverConfig';
+import axios from 'axios';
 
 import '../../GlobalStyles/Resources.css';
 import './styleDash.css';
 
 import logo from '../../GlobalStyles/images/logo.svg';
 import imagen from '../../GlobalStyles/images/image1.png';
+
+import NewMenuApplication from '../NuevoMenu/NuevoMenu';
+import { FaEye, FaEdit, FaTrash, FaPlus} from 'react-icons/fa';
 
 
 const PanelAdmin = () => {
@@ -36,21 +40,38 @@ const PanelAdmin = () => {
         })
     };
 
+    //crear funcion para ver a informacion del usuario con swal
+    const viewUserInfo = (user) => {
+        // Use Swal to display user information
+        Swal.fire({
+            title: 'User Information',
+            html: `
+                <p>User ID: ${user.UserID}</p>
+                <p>Email: ${user.Email}</p>
+                <p>Nombre: ${user.Nombre}</p>
+                <p>Apellidos: ${user.ApellidoP} ${user.ApellidoM}</p>
+                <p>Rol: ${user.Rol}</p>
+            `,
+            confirmButtonText: 'OK'
+        });
+    };
+
 
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch(backendUrl + '/AppConnection/Users', {
-                    method: 'GET',
+                const response = await axios.post(`${backendUrl}/AppConnection/Users/Table`, {
+                    ID_Centro: CID
+                }, {
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ "ID_Centro": CID })
+                    }
                 });
-                const responseData = await response.json();
-                if (response.ok) {
-                    setUsers(responseData);
+
+                if (response.status === 200) {
+                    setUsers(response.data);
+                    //console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
                 }
@@ -60,7 +81,7 @@ const PanelAdmin = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [backendUrl, CID]); 
 
     function GoAddUser() {
         navigate("/FormularioPersonal");
@@ -78,32 +99,8 @@ const PanelAdmin = () => {
     return (
         <body>
             <div className="left-panel">
-                <img src={logo} className='logo' />
-                <div className='contTitleLeft' >
-                    <label className='labelPanelLeft'>Menu de Administrador</label>
-                    <div className='line'></div>
-                </div>
-                <div className='contMenu' >
-                    <div className='optionBtn' onClick={GoAddUser}>
-                        <label className='txtBTN'>Agregar personal</label>
-                    </div>
-                    <div className='optionBtn' onClick={ModifyUser}>
-                        <label className='txtBTN'>Modificar personal</label>
-                    </div>
-                    <div className='optionBtn' onClick={DeleteUser}>
-                        <label className='txtBTN'>Eliminar personal</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoLogOut}>
-                        <label className='txtBTN'>Cerrar sesión</label>
-                    </div>
-                </div>
-                <div className='contentImage'>
-                    <img src={""} className='imagen' />
-                </div>
+                <NewMenuApplication/>
             </div>
-
-
-
 
             <div className="right-panel">
                 <div className="right-panel-content">
@@ -112,41 +109,44 @@ const PanelAdmin = () => {
                         <button className='buttonPrincipalGlobal' onClick={ModifyUser}>Modificar personal</button>
                         <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Eliminar personal</button>
                         <button className='buttonPrincipalGlobal' onClick={GoLogOut}>Cerrar Sesión</button>
-
                     </div>
 
                     <div className='table_container'>
                         <h1 className='titleForm'>Personal registrado</h1>
+                        <button className='buttonNewStyle' onClick={GoAddUser}>
+                            Agregar nuevo usuario <FaPlus />
+                        </button>
                         <table className='table'>
-
                             <thead>
                                 <tr>
-                                    <th>ID de Personal</th>
-                                    <th>Rol</th>
-                                    <th>ID Centro</th>
                                     <th>Email</th>
-
-                                    <th>Acceso</th>
-
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Rol</th>
+                                    <th>Ver</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user) => (
-                                    <tr key={user.PersonalID} onClick={() => handleRowClick(user.PersonalID)}>
-                                        <td>{user.PersonalID}</td>
-                                        <td>{user.Rol}</td>
-                                        <td>{user.ID_Centro}</td>
-                                        <td>{user.Email}</td>
-                                        <td>{user.Acceso}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
+    {users.map((user) => (
+        <tr key={user.UserID} >
+            <td>{user.Email}</td>
+            <td>{user.Nombre}</td>
+            <td>{user.ApellidoP + ' ' + user.ApellidoM}</td>
+            <td>{user.Rol}</td>
+            <td onClick={() => viewUserInfo(user)}><FaEye /></td>
+            <td><FaEdit /></td>
+            <td><FaTrash /></td>
+              
+        </tr>
+    ))}
+</tbody>
+
                         </table>
                     </div>
                 </div>
             </div>
-
-
         </body>
     );
 };
