@@ -11,9 +11,16 @@ import imagen from '../../GlobalStyles/images/image1.png';
 
 
 const PanelAdmin = () => {
+
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
+
+
+    const UID = localStorage.getItem('UID');
+    const CID = localStorage.getItem('CID');
+    const Rol = localStorage.getItem('Rol');
+    
 
     const handleRowClick = (personalID) => {
         // Copiar al portapapeles
@@ -34,7 +41,13 @@ const PanelAdmin = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch(backendUrl + '/api/tableRol');
+                const response = await fetch(backendUrl + '/AppConnection/Users', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "ID_Centro": CID })
+                });
                 const responseData = await response.json();
                 if (response.ok) {
                     setUsers(responseData);

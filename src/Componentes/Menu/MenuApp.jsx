@@ -80,6 +80,10 @@ const MenuApplication = () => {
         navigate('/MenuEstadistica', { state: { ID_PERSONAL: ID, Rol: Rol } });
     }
 
+    function GoUserAdmin() {
+        navigate('/DashboardRoles', { state: { ID_PERSONAL: ID, Rol: Rol } });
+    }
+
 
     function GoLogOut() {
         navigate("/loader-Login");
@@ -100,6 +104,9 @@ const MenuApplication = () => {
                     <div className='line'></div>
                 </div>
                 <div className='contMenu' >
+                <div className='optionBtn' onClick={GoUserAdmin}>
+                        <label className='txtBTN'>Admin</label>
+                    </div>
                     <div className='optionBtn' onClick={GoUser}>
                         <label className='txtBTN'>Usuarios</label>
                     </div>

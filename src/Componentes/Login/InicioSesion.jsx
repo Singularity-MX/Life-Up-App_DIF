@@ -96,25 +96,30 @@ function InicioSesion() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    const password = SHA256(password2).toString();
+    
     //-------------> Pasar el Hash de la contraseña
     //alert('user: ' + email + ' pass: ' + password);
     //alert(email +" -> " +password)
     try {
       // Hacer una solicitud POST al punto final de inicio de sesión en el servidor
-      const response = await fetch(backendUrl + '/api/loginNormal', {
+      const response = await fetch(backendUrl + '/AppConnection/Login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password2 }),
       });
-
 
 
       // Verificar el estado de la respuesta
       if (response.status === 200) {
         const responseData = await response.json();
+        
+        localStorage.setItem('UID', responseData.UserID);
+        localStorage.setItem('CID', responseData.ID_Centro);
+        localStorage.setItem('Rol', responseData.Rol);
+        
+
         const role = responseData.role;
         const id_personal = responseData.ID;
 
@@ -167,6 +172,8 @@ function InicioSesion() {
   function handleUserAdmin() {
     navigate("/LoginSU");
   }
+
+  
 
   //-----------------------------------------------------------------return
   return (
