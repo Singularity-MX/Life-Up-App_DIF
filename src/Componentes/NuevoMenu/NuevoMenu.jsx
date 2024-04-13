@@ -30,6 +30,9 @@ const NewMenuApplication = () => {
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
 
+    //obtener el rol del local storage
+    const rol = localStorage.getItem('Rol');
+
     const handleRowClick = (personalID) => {
         // Copiar al portapapeles
         navigator.clipboard.writeText(personalID);
@@ -98,40 +101,53 @@ const NewMenuApplication = () => {
 
     return (
         <body>
-            <div className="left-panel">
-                <img src={logo} className='logo' />
-                <div className='contTitleLeft' >
-                    <label className='labelPanelLeft'>Menu </label>
-                    <div className='line'></div>
-                </div>
-                <div className='contMenu' >
-                <div className='optionBtn' onClick={GoUserAdmin}>
-                        <label className='txtBTN'>Admin</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoUser}>
-                        <label className='txtBTN'>Usuarios</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoPsicologia}>
-                        <label className='txtBTN'>Psicología</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoEnfermeria}>
-                        <label className='txtBTN'>Enfermería</label>
-                    </div>
-
-                    <div className='optionBtn' onClick={GoTalleres}>
-                        <label className='txtBTN'>Talleres</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoEstadistica}>
-                        <label className='txtBTN'>Estadística general</label>
-                    </div>
-                    <div className='optionBtn' onClick={GoLogOut}>
-                        <label className='txtBTN'>Cerrar sesión</label>
-                    </div>
-                </div>
-                <div className='contentImage'>
-                    <img src={""} className='imagen' />
-                </div>
+              <div className="left-panel">
+            <img src={logo} className='logo' />
+            <div className='contTitleLeft' >
+                <label className='labelPanelLeft'>Menu </label>
+                <div className='line'></div>
             </div>
+            <div className='contMenu' >
+                {rol === 'Administrador' && (
+                    <>
+                        <div className='optionBtn' onClick={GoUserAdmin}>
+                            <label className='txtBTN'>Admin</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoUser}>
+                            <label className='txtBTN'>Usuarios</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoPsicologia}>
+                            <label className='txtBTN'>Psicología</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoEnfermeria}>
+                            <label className='txtBTN'>Enfermería</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoTalleres}>
+                            <label className='txtBTN'>Talleres</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoEstadistica}>
+                            <label className='txtBTN'>Estadística general</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoLogOut}>
+                            <label className='txtBTN'>Cerrar sesión</label>
+                        </div>
+                    </>
+                )}
+                {rol === 'Psicólogo' && (
+                    <>
+                        <div className='optionBtn' onClick={GoPsicologia}>
+                            <label className='txtBTN'>Psicología</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoLogOut}>
+                            <label className='txtBTN'>Cerrar sesión</label>
+                        </div>
+                    </>
+                )}
+            </div>
+            <div className='contentImage'>
+                <img src={""} className='imagen' />
+            </div>
+        </div>
 
 
 
