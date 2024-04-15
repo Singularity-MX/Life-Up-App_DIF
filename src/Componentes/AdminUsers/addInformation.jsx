@@ -15,7 +15,12 @@ import './styleAdd.css';
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
-const Formulario = () => {
+const Formulario_Personal = () => {
+
+    //obtener el NewUserID del local storage
+    const UID = localStorage.getItem('NewUserID');
+
+
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
     const [Rol, setRol] = useState('');
@@ -67,15 +72,12 @@ const Formulario = () => {
         };
         const response = await axios.post(backendUrl + '/AppConnection/Users', userData);
         const { UserID } = response.data;
-        //set con local storage
-        localStorage.setItem('NewUserID', UserID);
       Swal.fire({
         title: 'User ID',
         text: `The user ID is ${UserID}`,
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      personalInformation();
         // Handle success, navigate, show alert, etc.
       } catch (error) {
         console.error('Error:', error);
@@ -85,10 +87,6 @@ const Formulario = () => {
   
     const navigateToLoader = () => {
       navigate('/loader-DashboardSU');
-    };
-
-    const personalInformation = () => {
-      navigate('/NewPersonalInformation');
     };
   
     return (
@@ -144,5 +142,5 @@ const Formulario = () => {
    
   };
   
-  export default Formulario;
+  export default Formulario_Personal;
   

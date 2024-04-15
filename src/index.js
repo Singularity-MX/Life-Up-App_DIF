@@ -95,6 +95,12 @@ import ModuleSaludNewConsultaForm from './Componentes/Modulos/Enfermeria/Consult
 import ModuleTallerAddForm from './Componentes/Modulos/Talleres/Agregar/AgregarTaller';
 import ModuleTallerDelete from './Componentes/Modulos/Talleres/Eliminar/DeleteTaller';
 
+
+
+
+
+import Formulario_Personal from './Componentes/AdminUsers/addInformation';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -336,6 +342,11 @@ const router = createBrowserRouter([
   },
 
   
+//------------------nuevo app
+{
+  path: "/NewPersonalInformation",
+  element: <Formulario_Personal/>,
+},
 
 
 ]);
