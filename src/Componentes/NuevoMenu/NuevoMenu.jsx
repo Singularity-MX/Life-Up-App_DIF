@@ -32,6 +32,7 @@ const NewMenuApplication = () => {
 
     //obtener el rol del local storage
     const rol = localStorage.getItem('Rol');
+    console.log(rol);
 
     const handleRowClick = (personalID) => {
         // Copiar al portapapeles
@@ -133,7 +134,7 @@ const NewMenuApplication = () => {
                         </div>
                     </>
                 )}
-                {rol === 'Psicólogo' && (
+                {rol === 'Psicología' && (
                     <>
                         <div className='optionBtn' onClick={GoPsicologia}>
                             <label className='txtBTN'>Psicología</label>

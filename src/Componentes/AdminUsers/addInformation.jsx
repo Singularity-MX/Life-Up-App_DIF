@@ -16,19 +16,31 @@ import './styleAdd.css';
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
 const Formulario_Personal = () => {
-
+ 
     //obtener el NewUserID del local storage
     const UID = localStorage.getItem('NewUserID');
+    //Recibir el state del navigate
+    
+// Obtener la cadena JSON almacenada en localStorage
+const storedUserDataString = localStorage.getItem('InfoUserNew');
+
+// Convertir la cadena JSON de vuelta a un objeto JavaScript (userData)
+const JsonUser = JSON.parse(storedUserDataString);
+console.log(JsonUser);
+
 
 
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
     const [Rol, setRol] = useState('');
     const [ID_Centro, setCentroId] = useState('');
-    const [Email, setEmail] = useState('');
+    
     const [pass, setpass] = useState('');
     const [Acceso, setAcceso] = useState('');
   
+    const [ApellidoP, setApellidoP] = useState('');
+    const [ApellidoM, setApellidoM] = useState('');
+    const [Nombre, setNombre] = useState('');
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -64,20 +76,27 @@ const Formulario_Personal = () => {
   
     const AddUserBackend = async () => {
       try {
-        const userData = {
-          Email: Email,
-          Password: pass,
-          Rol: Rol,
-          ID_Centro: ID_Centro,
+        const InfoPersonalJSON = {
+          UserID: UID,
+          Nombre: Nombre,
+          ApellidoP: ApellidoP,
+          ApellidoM: ApellidoM,
         };
-        const response = await axios.post(backendUrl + '/AppConnection/Users', userData);
-        const { UserID } = response.data;
-      Swal.fire({
-        title: 'User ID',
-        text: `The user ID is ${UserID}`,
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
+        const response = await axios.post(backendUrl + '/AppConnection/Users/InformationPersonal', InfoPersonalJSON);
+      if (response.status === 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'User information added successfully',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to add user information',
+        });
+      }
+
         // Handle success, navigate, show alert, etc.
       } catch (error) {
         console.error('Error:', error);
@@ -99,37 +118,29 @@ const Formulario_Personal = () => {
         <div className="right-panel">
             <div className="right-panel-content">
               <div className='formContainer'>
-                <animated.h1 style={fade} className="titleForm">¡Bienvenido!</animated.h1>
-                <div className='containerInputLabel'>
-                  <label className='labelInput'>Elige un rol:</label>
-                  <select class="inputGlobal" value={Rol} onChange={handleRolChange} required>
-                    <option value="" disabled selected>Seleccionar Rol</option>
-                    <option value="Psicología">Psicóloga/o</option>
-                    <option value="Enfermería">Enfermera/o</option>
-                    <option value="Instructor">Instructora/or</option>
-                    <option value="Administrador">Administradora/or</option>
-          
-                  </select>
-                </div>
+                <animated.h1 style={fade} className="titleForm">Completar información</animated.h1>
+                
   
   
                 <div className='containerInputLabel'>
-                  <label className='labelInput'>Ingresa un correo electrónico:</label>
-                  <input class="inputGlobal" placeholder="example@mail.com" type="email" value={Email} onChange={e => setEmail(e.target.value)} required />
+                  <label className='labelInput'>Ingresa su nombre:</label>
+                  <input class="inputGlobal" placeholder="Your name" type="text" value={Nombre} onChange={e => setNombre(e.target.value)} required />
                 </div>
   
                 <div className='containerInputLabel'>
-                  <label className='labelInput'>Ingresa una contraseña:</label>
-                  <input class="inputGlobal" placeholder="*********" type="text" value={pass} onChange={e => setpass(e.target.value)} required />
+                  <label className='labelInput'>Ingresa su ap:</label>
+                  <input class="inputGlobal" placeholder="AP" type="text" value={ApellidoP} onChange={e => setApellidoP(e.target.value)} required />
                 </div>
-  
+
                 <div className='containerInputLabel'>
-                  <label className='labelInput'>Verifica los permisos de acceso:</label>
-                  <textarea class="inputGlobal" value={Acceso} readOnly />
+                  <label className='labelInput'>Ingresa su AM:</label>
+                  <input class="inputGlobal" placeholder="AM" type="text" value={ApellidoM} onChange={e => setApellidoM(e.target.value)} required />
                 </div>
   
-                <button className='buttonPrincipalGlobal' onClick={AddUserBackend}>Siguiente</button>
-                <button className='buttonPrincipalGlobal' onClick={'#'}>Cancelar</button>
+            
+  
+                <button className='buttonPrincipalGlobal' onClick={AddUserBackend}>Continuar</button>
+                
   
               </div>
             </div>
