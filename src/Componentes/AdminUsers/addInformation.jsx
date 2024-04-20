@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
+import { PDFDocument, rgb } from 'pdf-lib';
 
 import { useSpring, animated } from 'react-spring';
 
@@ -43,6 +44,11 @@ console.log(JsonUser);
     const [Nombre, setNombre] = useState('');
     const navigate = useNavigate();
   
+
+    function GoUser() {
+      navigate('/DashboardRoles');
+  }
+
     useEffect(() => {
       const GetCID = localStorage.getItem('CID');
       setCentroId(GetCID);
@@ -74,6 +80,74 @@ console.log(JsonUser);
       }
     };
   
+    const handleDownloadPDF = async (Data) => {
+      // Crear un nuevo documento PDF
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage();
+  
+      // Definir propiedades del documento
+      const pageSize = page.getSize();
+      const pageWidth = pageSize.width;
+      const pageHeight = pageSize.height;
+  
+      // Definir las posiciones de los campos en el PDF
+      const x = 50;
+      let y = pageHeight - 70;
+  
+      // Agregar los campos al PDF
+      const defaultFontSize = 12;
+      const fieldMargin = 10;
+  
+      const addFormField = (label, value) => {
+        page.drawText(`${label}:`, {
+          x,
+          y,
+          size: defaultFontSize,
+          color: rgb(0, 0, 0),
+        });
+  
+        page.drawText(value, {
+          x: x + 100,
+          y,
+          size: defaultFontSize,
+          color: rgb(0, 0, 0),
+        });
+  
+        y -= defaultFontSize + fieldMargin;
+      };
+  
+  
+  
+  
+  
+      addFormField('ID de usuario', Data.UserID);
+      addFormField('Nombre', Data.Nombre);
+      addFormField('Apellido Paterno', Data.ApellidoP);
+      addFormField('Apellido Materno', Data.ApellidoM);
+      addFormField('Rol asignado', JsonUser.Rol);
+      addFormField('Email', JsonUser.Email);
+      addFormField('Password', JsonUser.Password);
+      addFormField('ID Centro', JsonUser.ID_Centro);
+  
+      
+  
+      // Generar el PDF en formato bytes
+      const pdfBytes = await pdfDoc.save();
+  
+      // Crear un objeto Blob y generar una URL para el archivo PDF
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+  
+      // Crear un enlace de descarga y hacer clic automáticamente
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Comprobante - ' + Data.UserID + '.pdf';
+      link.click();
+  
+      //Alerta('success', 'Datos generados', 'Se descargó correctamente')
+    };
+
+    
     const AddUserBackend = async () => {
       try {
         const InfoPersonalJSON = {
@@ -84,11 +158,20 @@ console.log(JsonUser);
         };
         const response = await axios.post(backendUrl + '/AppConnection/Users/InformationPersonal', InfoPersonalJSON);
       if (response.status === 200) {
+        //construir un pdf y descargar
+        handleDownloadPDF(InfoPersonalJSON);
         Swal.fire({
           icon: 'success',
-          title: 'Success',
-          text: 'User information added successfully',
+          title: 'Usuario agregado',
+          text: 'Usuario agregado correctamente, se ha generado un comprobante en PDF',
+          //validar un boton de aceptar
+          showConfirmButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            GoUser();
+          }
         });
+
       } else {
         Swal.fire({
           icon: 'error',
