@@ -116,6 +116,7 @@ function InicioSesion() {
         const responseData = await response.json();
         
         localStorage.setItem('UID', responseData.UserID);
+        localStorage.setItem('Email', responseData.Email);
         localStorage.setItem('CID', responseData.ID_Centro);
         localStorage.setItem('Rol', responseData.Rol);
         

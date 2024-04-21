@@ -6,7 +6,7 @@ import axios from 'axios';
 
 //import '../../GlobalStyles/Resources.css';
 //import './styleDash.css';
-import './Style/AdminUser.css';
+//import './Style/AdminUser.css';
 
 import logo from '../../GlobalStyles/images/logo.svg';
 import imagen from '../../GlobalStyles/images/image1.png';
@@ -17,7 +17,7 @@ import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 
 import HeaderApp from '../Header/Header';
 
-const PanelAdmin = () => {
+const PanelPsicologia = () => {
 
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
@@ -186,7 +186,7 @@ const PanelAdmin = () => {
 
             <div className="container-Body">
                 <div className="headerInfo">
-                    <HeaderApp titulo="Usuarios" />
+                    <HeaderApp titulo="Consultas" />
                 </div>
                 <div className="contenido">
                     <div className="tableContainer">
@@ -236,4 +236,4 @@ const PanelAdmin = () => {
     );
 };
 
-export default PanelAdmin;
+export default PanelPsicologia;

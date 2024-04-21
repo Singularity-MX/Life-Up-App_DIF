@@ -23,6 +23,8 @@ import img7 from '../../GlobalStyles/images/carrousell/7.png';
 
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
+import HeaderApp from '../Header/Header';
+
 
 const MenuApplication = () => {
     const routeLocation = useLocation();
@@ -100,65 +102,20 @@ const MenuApplication = () => {
     }
 
     return (
-        <body>
-            <div className="left-panel">
-            <NewMenuApplication/>
+        <div className='Body-PanelSU'>
+            <div className="container-Menu">
+                <NewMenuApplication/>
             </div>
 
-
-
-
-            <div className="right-panel">
-                <div className="right-panel-content">
-                    <div className='formSecundarioBTN'>
-                        <button className='buttonPrincipalGlobal' onClick={GoUser}>Psicología</button>
-                        <button className='buttonPrincipalGlobal' onClick={ModifyUser}>Enfermería</button>
-                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Estadística General</button>
-                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Agregar Usuarios</button>
-                        <button className='buttonPrincipalGlobal' onClick={DeleteUser}>Talleres</button>
-                        <button className='buttonPrincipalGlobal' onClick={GoLogOut}>Cerrar Sesión</button>
-
-                    </div>
-
-                    <div className='table_container'>
-                        <h1 className='titleForm'>Tu rol es {Rol} </h1>
-                        <Carousel autoPlay={true} interval={10000} infiniteLoop={true}>
-                            <div>
-                                <img src={img1} alt="Imagen 1" />
-
-                            </div>
-                            <div>
-                                <img src={img2} alt="Imagen 2" />
-
-                            </div>
-                            <div>
-                                <img src={img3} alt="Imagen 3" />
-
-                            </div>
-                            <div>
-                                <img src={img4} alt="Imagen 4" />
-
-                            </div>
-                            <div>
-                                <img src={img5} alt="Imagen 5" />
-
-                            </div>
-                            <div>
-                                <img src={img6} alt="Imagen 6" />
-
-                            </div>
-                            <div>
-                                <img src={img7} alt="Imagen 7" />
-
-                            </div>
-
-                        </Carousel>
-                    </div>
+            <div className="container-Body">
+                <div className="headerInfo">
+                    <HeaderApp titulo="Home" />
+                </div>
+                <div className="contenido">
+                 
                 </div>
             </div>
-
-
-        </body>
+        </div>
     );
 };
 

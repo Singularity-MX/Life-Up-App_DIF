@@ -101,6 +101,13 @@ import ModuleTallerDelete from './Componentes/Modulos/Talleres/Eliminar/DeleteTa
 
 import Formulario_Personal from './Componentes/AdminUsers/addInformation';
 
+
+//nuevas ventanas
+//aqui poner admin
+
+//psico
+import PanelPsicologia from './Componentes/NewPsicologia/PanelPsicologia';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -348,7 +355,10 @@ const router = createBrowserRouter([
   element: <Formulario_Personal/>,
 },
 
-
+{
+  path: "/PanelPsicologia",
+  element: <PanelPsicologia/>,
+},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

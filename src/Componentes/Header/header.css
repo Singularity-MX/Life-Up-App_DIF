@@ -1,0 +1,63 @@
+.containerHeader{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+background-color: rgba(135, 168, 157, 0);
+}
+
+.cont_titulo{
+    width: 50%;
+
+display: flex;
+flex-direction: row;
+justify-content: start;
+align-items: center;
+align-content: center;
+}
+
+.cont_titulo h1{
+    margin-left: 0.9em;
+    padding: 0;
+    font-size: 2em;
+    color: rgb(24, 24, 24);
+}
+
+.email{
+    margin-left: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 1px solid rgba(14, 14, 14, 0.295);
+    background-color: rgb(255, 255, 255);
+}
+.email p{
+    margin: 5px 6px 5px 6px;
+    padding: 0;
+    color: rgb(12, 12, 12);
+    font-size: 0.9em;
+
+}
+
+.cont_Rol{
+width: 50%;
+display: flex;
+flex-direction: row;
+justify-content: end;
+align-items: center;
+align-content: center;
+    padding-right: 2em;
+}
+
+.cont_Rol p{
+  
+    margin: 5px 8px 5px 8px;
+    padding: 5px;
+    color: rgb(12, 12, 12);
+    font-size: 1em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border: 1px solid rgba(14, 14, 14, 0.295);
+}

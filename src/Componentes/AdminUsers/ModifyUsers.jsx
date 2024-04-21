@@ -15,7 +15,7 @@ import './styleAdd.css';
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
-const Formulario = () => {
+const ModifyUsers = () => {
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const [Rol, setRol] = useState('');
@@ -58,8 +58,6 @@ const Formulario = () => {
   };
 
   const AddUserBackend = async () => {
-    
-    
     try {
       const userData = {
         Email: Email,
@@ -79,31 +77,18 @@ const Formulario = () => {
       localStorage.setItem('InfoUserNew', userDataString);
 
 
-      
+      Swal.fire({
+        title: 'Nuevo usuario creado',
+        text: `The user ID is ${UserID}`,
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
       personalInformation(userData);
       // Handle success, navigate, show alert, etc.
     } catch (error) {
       console.error('Error:', error);
       // Handle error, show alert, etc.
     }
-  };
-
-  const confirmInformation = () => {
-    //mostrar un swal  si desdea continuar
-    Swal.fire({
-      title: '¿Desea continuar?',
-      text: "Verifique la información antes de continuar, no podrá modificarla después.",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, continuar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        AddUserBackend();
-      }
-    }
-    )
   };
 
   const navigateToLoader = () => {
@@ -119,16 +104,16 @@ const Formulario = () => {
   }
 
   return (
-    <div className='Body-PanelSU'>
-        <div className="container-Menu">
-            <NewMenuApplication/>
-        </div>
+    <body>
+      <div className="left-panel">
+        <NewMenuApplication />
+      </div>
 
-        <div className="container-Body">
-            
-            <div className="contenido">
-            <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Agregar nuevo usuario</animated.h1>
+
+      <div className="right-panel">
+        <div className="right-panel-content">
+          <div className='formContainer'>
+            <animated.h1 style={fade} className="titleForm">Modificar usuario</animated.h1>
             <div className='containerInputLabel'>
               <label className='labelInput'>Elige un rol:</label>
               <select class="inputGlobal" value={Rol} onChange={handleRolChange} required>
@@ -157,15 +142,18 @@ const Formulario = () => {
               <textarea class="inputGlobal" value={Acceso} readOnly />
             </div>
 
-            <button className='buttonPrincipalGlobal' onClick={confirmInformation}>Siguiente</button>
+            <button className='buttonPrincipalGlobal' onClick={AddUserBackend}>Siguiente</button>
             <button className='buttonPrincipalGlobal' onClick={goBack}>Cancelar</button>
 
           </div>
-            </div>
         </div>
-    </div>
-);
+
+      </div>
+
+
+    </body>
+  );
 
 };
 
-export default Formulario;
+export default ModifyUsers;
