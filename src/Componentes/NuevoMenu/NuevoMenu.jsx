@@ -55,9 +55,7 @@ const NewMenuApplication = () => {
                         <div className='optionBtn' onClick={GoUserAdmin}>
                             <label className='txtBTN'>Panel de administrador</label>
                         </div>
-                        <div className='optionBtn' onClick={GoUser}>
-                            <label className='txtBTN'>Psicología</label>
-                        </div>
+                       
                         <div className='optionBtn' onClick={GoPsicologia}>
                             <label className='txtBTN'>Psicología</label>
                         </div>

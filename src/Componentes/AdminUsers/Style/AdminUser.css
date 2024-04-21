@@ -58,6 +58,7 @@
     align-items: center;
     margin-left: 2em;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .tableContainer{

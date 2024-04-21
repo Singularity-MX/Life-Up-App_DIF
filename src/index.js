@@ -107,6 +107,8 @@ import Formulario_Personal from './Componentes/AdminUsers/addInformation';
 
 //psico
 import PanelPsicologia from './Componentes/NewPsicologia/PanelPsicologia';
+import CreateConsultaPsicologia from './Componentes/NewPsicologia/CreateConsultaPsicologia';
+import CreateConsultaPsicologia2 from './Componentes/NewPsicologia/CreateConsultaPsicologia2';
 
 const router = createBrowserRouter([
   {
@@ -359,6 +361,16 @@ const router = createBrowserRouter([
   path: "/PanelPsicologia",
   element: <PanelPsicologia/>,
 },
+{
+  path: "/Nueva-cosulta-psicologia",
+  element: <CreateConsultaPsicologia/>,
+},
+{
+  path: "/Nueva-cosulta-psicologia-informacion",
+  element: <CreateConsultaPsicologia2/>,
+},
+
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

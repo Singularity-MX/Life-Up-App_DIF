@@ -17,6 +17,8 @@ import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 
 import HeaderApp from '../Header/Header';
 
+
+
 const PanelPsicologia = () => {
 
     const [users, setUsers] = useState([]);
@@ -95,8 +97,8 @@ const PanelPsicologia = () => {
         fetchUsers();
     }, [backendUrl, CID]);
 
-    function GoAddUser() {
-        navigate("/FormularioPersonal");
+    function NuevaConsulta() {
+        navigate("/Nueva-cosulta-psicologia");
     }
     function GoLogOut() {
         navigate("/LoginSU");
@@ -192,7 +194,7 @@ const PanelPsicologia = () => {
                     <div className="tableContainer">
                         <div className="containerCardTable">
                             <div className="elementsTopContainer">
-                                <h1 className='TitleTable' onClick={GoAddUser}>Agregar nuevo</h1>
+                                <h1 className='TitleTable' onClick={NuevaConsulta}>Agregar nueva</h1>
                                 <input
                                     type="text"
                                     placeholder="Buscar por nombre"
