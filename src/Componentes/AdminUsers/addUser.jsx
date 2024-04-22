@@ -9,8 +9,8 @@ import Swal from 'sweetalert2';
 import { useSpring, animated } from 'react-spring';
 
 
-import '../../GlobalStyles/Resources.css';
-import './styleAdd.css';
+//import '../../GlobalStyles/Resources.css';
+//import './styleAdd.css';
 
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';

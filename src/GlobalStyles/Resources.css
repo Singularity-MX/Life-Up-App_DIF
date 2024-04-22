@@ -112,3 +112,10 @@ outline: none;
   background-color: #f1f1f1;
   cursor: pointer;
 }
+
+
+@media (min-width: 1000px)  { /*vista de lapto*/
+.inputGlobal{
+ 
+}
+}

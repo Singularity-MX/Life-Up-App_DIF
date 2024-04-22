@@ -109,6 +109,8 @@ import Formulario_Personal from './Componentes/AdminUsers/addInformation';
 import PanelPsicologia from './Componentes/NewPsicologia/PanelPsicologia';
 import CreateConsultaPsicologia from './Componentes/NewPsicologia/CreateConsultaPsicologia';
 import CreateConsultaPsicologia2 from './Componentes/NewPsicologia/CreateConsultaPsicologia2';
+import ViewBoleta from './Componentes/NewPsicologia/ViewBoleta';
+
 
 const router = createBrowserRouter([
   {
@@ -369,6 +371,11 @@ const router = createBrowserRouter([
   path: "/Nueva-cosulta-psicologia-informacion",
   element: <CreateConsultaPsicologia2/>,
 },
+{
+  path: "/Psicologia/Boleta",
+  element: <ViewBoleta/>,
+},
+
 
 
 ]);

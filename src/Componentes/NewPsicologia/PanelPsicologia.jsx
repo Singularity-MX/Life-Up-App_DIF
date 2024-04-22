@@ -12,7 +12,7 @@ import logo from '../../GlobalStyles/images/logo.svg';
 import imagen from '../../GlobalStyles/images/image1.png';
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
-import { FaEye, FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive} from 'react-icons/fa';
 
 
 import HeaderApp from '../Header/Header';
@@ -44,7 +44,7 @@ const PanelPsicologia = () => {
 
         })
     };
-
+    
     //crear funcion para ver a informacion del usuario con swal
     const viewUserInfo = (user) => {
         // Use Swal to display user information
@@ -70,6 +70,9 @@ const PanelPsicologia = () => {
         });
     };
 
+    const goBoleta = () => {
+        navigate("/Psicologia/Boleta");
+    };
 
 
     useEffect(() => {
@@ -113,7 +116,7 @@ const PanelPsicologia = () => {
     const DeleteUSR = (user) => {
         //Confirmar con un swal si se desea eliminar el usuario
         Swal.fire({
-            title: '¿Estás seguro de eliminar este usuario?',
+            title: '¿Estás seguro de eliminar esta consulta?',
             text: "No podrás revertir esto!",
             icon: 'warning',
             showCancelButton: true,
@@ -122,7 +125,7 @@ const PanelPsicologia = () => {
             confirmButtonText: 'Sí, eliminarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                RequestDeleteINFO(user.UserID);
+                RequestDeleteINFO(user.NumeroExpediente);
             }
         })
     };
@@ -147,7 +150,7 @@ const PanelPsicologia = () => {
 
     const RequestDeleteUSR = async (ID) => {
         try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Users/` + ID, {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Psicologia/Consulta/` + ID, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -156,8 +159,8 @@ const PanelPsicologia = () => {
             if (response.status === 200) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Usuario eliminado',
-                    text: 'El usuario ha sido eliminado correctamente',
+                    title: 'Consulta eliminada',
+                    text: 'La consulta ha sido eliminado correctamente',
                     showConfirmButton: true,
                     timer: 1500
                 });//cuando se cierre el mensaje se recargara la pagina
@@ -212,6 +215,7 @@ const PanelPsicologia = () => {
                                             <th className='thdT2'>Apellidos</th>
                                             <th className='thdT2'>Fecha</th>
                                             <th className='thdT2'>Ver</th>
+                                            <th className='thdT2'>Abrir</th>
                                             <th className='thdT2'>Eliminar</th>
                                         </tr>
                                     </thead>
@@ -223,6 +227,7 @@ const PanelPsicologia = () => {
                                                 <td className='tdT2'>{consult.ApellidoP + ' ' + consult.ApellidoM}</td>
                                                 <td className='tdT2'>{new Date(consult.Fecha).toLocaleDateString('es-ES')}</td>
                                                 <td id="ICON_Table" className='tdT2' onClick={() => viewUserInfo(consult)}><FaEye /></td>
+                                                <td id="ICON_Table" className='tdT2' onClick={() => goBoleta(consult)}><FaArchive /></td>
                                                 <td id="ICON_Table" className='tdT2' onClick={() => DeleteUSR(consult)}><FaTrash /></td>
                                             </tr>
                                         ))}

@@ -134,60 +134,56 @@ const CreateConsultaPsicologia2 = () => {
 
 
   return (
-    <body>
-      <div className="left-panel">
-        <NewMenuApplication />
-      </div>
+    <div className='Body-PanelSU'>
+        <div className="container-Menu">
+            <NewMenuApplication/>
+        </div>
 
-
-      <div className="right-panel">
-        <div className="right-panel-content">
-          <div className='formContainer'>
+        <div className="container-Body">
+            
+            <div className="contenido">
+            <div className='formContainer'>
             <animated.h1 style={fade} className="titleForm">Información de paciente</animated.h1>
 
 
 
-            <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa su telefono:</label>
-              <input class="inputGlobal" placeholder="Numero de contacto" type="text" value={Telefono} onChange={e => setTelefono(e.target.value)} required />
-            </div>
+<div className='containerInputLabel'>
+  <label className='labelInput'>Ingresa su telefono:</label>
+  <input class="inputGlobal" placeholder="Numero de contacto" type="text" value={Telefono} onChange={e => setTelefono(e.target.value)} required />
+</div>
 
-            <div className="containerInputLabel">
-              <label className="labelInput">Elige la delegación:</label>
-              <select
-                className="inputGlobal"
-                value={SelectedDelegacion}
-                onChange={(e) => setSelectedDelegacion(e.target.value)}
-                required
-              >
-                <option value="" disabled>
-                  Seleccionar Delegación
-                </option>
-                {delegaciones.map((delegacion) => (
-                  <option key={delegacion.ID_Delegacion} value={delegacion.ID_Delegacion}>
-                    {delegacion.Nombre}
-                  </option>
-                ))}
-              </select>
-            </div>
+<div className="containerInputLabel">
+  <label className="labelInput">Elige la delegación:</label>
+  <select
+    className="inputGlobal"
+    value={SelectedDelegacion}
+    onChange={(e) => setSelectedDelegacion(e.target.value)}
+    required
+  >
+    <option value="" disabled>
+      Seleccionar Delegación
+    </option>
+    {delegaciones.map((delegacion) => (
+      <option key={delegacion.ID_Delegacion} value={delegacion.ID_Delegacion}>
+        {delegacion.Nombre}
+      </option>
+    ))}
+  </select>
+</div>
 
-            <div className='containerInputLabel'>
-              <label className='labelInput'>Motivo de intervención:</label>
-              <textarea class="inputGlobal" value={Motivo}onChange={e => setMotivo(e.target.value)} required/>
-            </div>
+<div className='containerInputLabel'>
+  <label className='labelInput'>Motivo de intervención:</label>
+  <textarea class="inputGlobal" value={Motivo}onChange={e => setMotivo(e.target.value)} required/>
+</div>
 
 
-            <button className='buttonPrincipalGlobal' onClick={confirmInformation}>Continuar</button>
-
+<button className='buttonPrincipalGlobal' onClick={confirmInformation}>Continuar</button>
 
           </div>
+            </div>
         </div>
-
-      </div>
-
-
-    </body>
-  );
+    </div>
+);
 
 };
 

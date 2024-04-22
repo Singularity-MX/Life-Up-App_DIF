@@ -17,146 +17,146 @@ import './styleAdd.css';
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
 const Formulario_Personal = () => {
- 
-    //obtener el NewUserID del local storage
-    const UID = localStorage.getItem('NewUserID');
-    //Recibir el state del navigate
-    
-// Obtener la cadena JSON almacenada en localStorage
-const storedUserDataString = localStorage.getItem('InfoUserNew');
 
-// Convertir la cadena JSON de vuelta a un objeto JavaScript (userData)
-const JsonUser = JSON.parse(storedUserDataString);
-console.log(JsonUser);
+  //obtener el NewUserID del local storage
+  const UID = localStorage.getItem('NewUserID');
+  //Recibir el state del navigate
+
+  // Obtener la cadena JSON almacenada en localStorage
+  const storedUserDataString = localStorage.getItem('InfoUserNew');
+
+  // Convertir la cadena JSON de vuelta a un objeto JavaScript (userData)
+  const JsonUser = JSON.parse(storedUserDataString);
+  console.log(JsonUser);
 
 
 
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
-    const [Rol, setRol] = useState('');
-    const [ID_Centro, setCentroId] = useState('');
-    
-    const [pass, setpass] = useState('');
-    const [Acceso, setAcceso] = useState('');
-  
-    const [ApellidoP, setApellidoP] = useState('');
-    const [ApellidoM, setApellidoM] = useState('');
-    const [Nombre, setNombre] = useState('');
-    const navigate = useNavigate();
-  
+  const [Rol, setRol] = useState('');
+  const [ID_Centro, setCentroId] = useState('');
 
-    function GoUser() {
-      navigate('/DashboardRoles');
+  const [pass, setpass] = useState('');
+  const [Acceso, setAcceso] = useState('');
+
+  const [ApellidoP, setApellidoP] = useState('');
+  const [ApellidoM, setApellidoM] = useState('');
+  const [Nombre, setNombre] = useState('');
+  const navigate = useNavigate();
+
+
+  function GoUser() {
+    navigate('/DashboardRoles');
   }
 
-    useEffect(() => {
-      const GetCID = localStorage.getItem('CID');
-      setCentroId(GetCID);
-    }, []); // Run once on component mount
-  
-    const handleRolChange = (e) => {
-      const selectedRol = e.target.value;
-      setRol(selectedRol);
-  
-      // Set Acceso based on selectedRol
-      switch (selectedRol) {
-        case 'Psicología':
-          setAcceso('ÁREA DE PSICOLOGÍA');
-          break;
-        case 'Enfermería':
-          setAcceso('ÁREA DE ENFERMERÍA');
-          break;
-        case 'Instructor':
-          setAcceso('ÁREA DE TALLERES Y ACTIVIDADES');
-          break;
-        case 'Administrador':
-          setAcceso('TODAS LAS ÁREAS');
-          break;
-        case 'Recepción':
-          setAcceso('ÁREA DE REGISTRO DE USUARIOS');
-          break;
-        default:
-          setAcceso('');
-      }
-    };
-  
-    const handleDownloadPDF = async (Data) => {
-      // Crear un nuevo documento PDF
-      const pdfDoc = await PDFDocument.create();
-      const page = pdfDoc.addPage();
-  
-      // Definir propiedades del documento
-      const pageSize = page.getSize();
-      const pageWidth = pageSize.width;
-      const pageHeight = pageSize.height;
-  
-      // Definir las posiciones de los campos en el PDF
-      const x = 50;
-      let y = pageHeight - 70;
-  
-      // Agregar los campos al PDF
-      const defaultFontSize = 12;
-      const fieldMargin = 10;
-  
-      const addFormField = (label, value) => {
-        page.drawText(`${label}:`, {
-          x,
-          y,
-          size: defaultFontSize,
-          color: rgb(0, 0, 0),
-        });
-  
-        page.drawText(value, {
-          x: x + 100,
-          y,
-          size: defaultFontSize,
-          color: rgb(0, 0, 0),
-        });
-  
-        y -= defaultFontSize + fieldMargin;
-      };
-  
-  
-  
-  
-  
-      addFormField('ID de usuario', Data.UserID);
-      addFormField('Nombre', Data.Nombre);
-      addFormField('Apellido Paterno', Data.ApellidoP);
-      addFormField('Apellido Materno', Data.ApellidoM);
-      addFormField('Rol asignado', JsonUser.Rol);
-      addFormField('Email', JsonUser.Email);
-      addFormField('Password', JsonUser.Password);
-      addFormField('ID Centro', JsonUser.ID_Centro);
-  
-      
-  
-      // Generar el PDF en formato bytes
-      const pdfBytes = await pdfDoc.save();
-  
-      // Crear un objeto Blob y generar una URL para el archivo PDF
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-  
-      // Crear un enlace de descarga y hacer clic automáticamente
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'Comprobante - ' + Data.UserID + '.pdf';
-      link.click();
-  
-      //Alerta('success', 'Datos generados', 'Se descargó correctamente')
+  useEffect(() => {
+    const GetCID = localStorage.getItem('CID');
+    setCentroId(GetCID);
+  }, []); // Run once on component mount
+
+  const handleRolChange = (e) => {
+    const selectedRol = e.target.value;
+    setRol(selectedRol);
+
+    // Set Acceso based on selectedRol
+    switch (selectedRol) {
+      case 'Psicología':
+        setAcceso('ÁREA DE PSICOLOGÍA');
+        break;
+      case 'Enfermería':
+        setAcceso('ÁREA DE ENFERMERÍA');
+        break;
+      case 'Instructor':
+        setAcceso('ÁREA DE TALLERES Y ACTIVIDADES');
+        break;
+      case 'Administrador':
+        setAcceso('TODAS LAS ÁREAS');
+        break;
+      case 'Recepción':
+        setAcceso('ÁREA DE REGISTRO DE USUARIOS');
+        break;
+      default:
+        setAcceso('');
+    }
+  };
+
+  const handleDownloadPDF = async (Data) => {
+    // Crear un nuevo documento PDF
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage();
+
+    // Definir propiedades del documento
+    const pageSize = page.getSize();
+    const pageWidth = pageSize.width;
+    const pageHeight = pageSize.height;
+
+    // Definir las posiciones de los campos en el PDF
+    const x = 50;
+    let y = pageHeight - 70;
+
+    // Agregar los campos al PDF
+    const defaultFontSize = 12;
+    const fieldMargin = 10;
+
+    const addFormField = (label, value) => {
+      page.drawText(`${label}:`, {
+        x,
+        y,
+        size: defaultFontSize,
+        color: rgb(0, 0, 0),
+      });
+
+      page.drawText(value, {
+        x: x + 100,
+        y,
+        size: defaultFontSize,
+        color: rgb(0, 0, 0),
+      });
+
+      y -= defaultFontSize + fieldMargin;
     };
 
-    
-    const AddUserBackend = async () => {
-      try {
-        const InfoPersonalJSON = {
-          UserID: UID,
-          Nombre: Nombre,
-          ApellidoP: ApellidoP,
-          ApellidoM: ApellidoM,
-        };
-        const response = await axios.post(backendUrl + '/AppConnection/Users/InformationPersonal', InfoPersonalJSON);
+
+
+
+
+    addFormField('ID de usuario', Data.UserID);
+    addFormField('Nombre', Data.Nombre);
+    addFormField('Apellido Paterno', Data.ApellidoP);
+    addFormField('Apellido Materno', Data.ApellidoM);
+    addFormField('Rol asignado', JsonUser.Rol);
+    addFormField('Email', JsonUser.Email);
+    addFormField('Password', JsonUser.Password);
+    addFormField('ID Centro', JsonUser.ID_Centro);
+
+
+
+    // Generar el PDF en formato bytes
+    const pdfBytes = await pdfDoc.save();
+
+    // Crear un objeto Blob y generar una URL para el archivo PDF
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+
+    // Crear un enlace de descarga y hacer clic automáticamente
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Comprobante - ' + Data.UserID + '.pdf';
+    link.click();
+
+    //Alerta('success', 'Datos generados', 'Se descargó correctamente')
+  };
+
+
+  const AddUserBackend = async () => {
+    try {
+      const InfoPersonalJSON = {
+        UserID: UID,
+        Nombre: Nombre,
+        ApellidoP: ApellidoP,
+        ApellidoM: ApellidoM,
+      };
+      const response = await axios.post(backendUrl + '/AppConnection/Users/InformationPersonal', InfoPersonalJSON);
       if (response.status === 200) {
         //construir un pdf y descargar
         handleDownloadPDF(InfoPersonalJSON);
@@ -180,80 +180,71 @@ console.log(JsonUser);
         });
       }
 
-        // Handle success, navigate, show alert, etc.
-      } catch (error) {
-        console.error('Error:', error);
-        // Handle error, show alert, etc.
-      }
-    };
-  
-
-    const confirmInformation = () => {
-      //mostrar un swal  si desdea continuar
-      Swal.fire({
-        title: '¿Desea continuar?',
-        text: "Verifique la información antes de continuar, no podrá modificarla después.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, continuar!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          AddUserBackend();
-        }
-      }
-      )
-    };
-
-    const navigateToLoader = () => {
-      navigate('/loader-DashboardSU');
-    };
-  
-    return (
-      <body>
-        <div className="left-panel">
-        <NewMenuApplication/>
-        </div>
-  
-  
-        <div className="right-panel">
-            <div className="right-panel-content">
-              <div className='formContainer'>
-                <animated.h1 style={fade} className="titleForm">Completa su información</animated.h1>
-                
-  
-  
-                <div className='containerInputLabel'>
-                  <label className='labelInput'>Ingresa su nombre:</label>
-                  <input class="inputGlobal" placeholder="Nombre" type="text" value={Nombre} onChange={e => setNombre(e.target.value)} required />
-                </div>
-  
-                <div className='containerInputLabel'>
-                  <label className='labelInput'>Ingresa su apellido paterno:</label>
-                  <input class="inputGlobal" placeholder="Apellido Paterno " type="text" value={ApellidoP} onChange={e => setApellidoP(e.target.value)} required />
-                </div>
-
-                <div className='containerInputLabel'>
-                  <label className='labelInput'>Ingresa su apellido materno:</label>
-                  <input class="inputGlobal" placeholder="Apellido Materno" type="text" value={ApellidoM} onChange={e => setApellidoM(e.target.value)} required />
-                </div>
-  
-            
-  
-                <button className='buttonPrincipalGlobal' onClick={confirmInformation}>Continuar</button>
-                
-  
-              </div>
-            </div>
-            
-          </div>
-  
-  
-      </body>
-    );
-   
+      // Handle success, navigate, show alert, etc.
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error, show alert, etc.
+    }
   };
-  
-  export default Formulario_Personal;
-  
+
+
+  const confirmInformation = () => {
+    //mostrar un swal  si desdea continuar
+    Swal.fire({
+      title: '¿Desea continuar?',
+      text: "Verifique la información antes de continuar, no podrá modificarla después.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, continuar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        AddUserBackend();
+      }
+    }
+    )
+  };
+
+  const navigateToLoader = () => {
+    navigate('/loader-DashboardSU');
+  };
+
+  return (
+    <div className='Body-PanelSU'>
+      <div className="container-Menu">
+        <NewMenuApplication />
+      </div>
+
+      <div className="container-Body">
+
+        <div className="contenido">
+          <div className='formContainer'>
+            <animated.h1 style={fade} className="titleForm">Completa su información</animated.h1>
+
+            <div className='containerInputLabel'>
+              <label className='labelInput'>Ingresa su nombre:</label>
+              <input class="inputGlobal" placeholder="Nombre" type="text" value={Nombre} onChange={e => setNombre(e.target.value)} required />
+            </div>
+
+            <div className='containerInputLabel'>
+              <label className='labelInput'>Ingresa su apellido paterno:</label>
+              <input class="inputGlobal" placeholder="Apellido Paterno " type="text" value={ApellidoP} onChange={e => setApellidoP(e.target.value)} required />
+            </div>
+
+            <div className='containerInputLabel'>
+              <label className='labelInput'>Ingresa su apellido materno:</label>
+              <input class="inputGlobal" placeholder="Apellido Materno" type="text" value={ApellidoM} onChange={e => setApellidoM(e.target.value)} required />
+            </div>
+
+            <button className='buttonPrincipalGlobal' onClick={confirmInformation}>Continuar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+};
+
+export default Formulario_Personal;
