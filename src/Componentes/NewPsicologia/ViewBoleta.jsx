@@ -46,7 +46,7 @@ const ViewBoleta = () => {
                 </div>
                 <div className="contenido">
                 <div className="containerBoletaPsicologia">
-                    <BoletaConsultaComponente/>
+                    <BoletaConsultaComponente />
                     </div>   
 
                 </div>
