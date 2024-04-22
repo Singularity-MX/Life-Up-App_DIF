@@ -21,7 +21,7 @@ import HeaderApp from '../Header/Header';
 
 const PanelPsicologia = () => {
 
-    const [users, setUsers] = useState([]);
+    const [consultas, setConsultas] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
 
@@ -73,10 +73,10 @@ const PanelPsicologia = () => {
 
 
     useEffect(() => {
-        const fetchUsers = async () => {
+        const fetchConsultas = async () => {
             try {
-                const response = await axios.post(`${backendUrl}/AppConnection/Users/Table`, {
-                    ID_Centro: CID
+                const response = await axios.get(`${backendUrl}/AppConnection/Psicologia/Consulta/`+UID, {
+                    
                 }, {
                     headers: {
                         'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ const PanelPsicologia = () => {
                 });
 
                 if (response.status === 200) {
-                    setUsers(response.data);
+                    setConsultas(response.data);
                     //console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
@@ -94,7 +94,7 @@ const PanelPsicologia = () => {
             }
         };
 
-        fetchUsers();
+        fetchConsultas();
     }, [backendUrl, CID]);
 
     function NuevaConsulta() {
@@ -176,7 +176,7 @@ const PanelPsicologia = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     // Filtrar los datos por el nombre
-    const filteredData = users.filter(item =>
+    const filteredData = consultas.filter(item =>
         item.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -207,23 +207,23 @@ const PanelPsicologia = () => {
                                 <table className='tableT2'>
                                     <thead className='theadT2'>
                                         <tr className='trT2'>
-                                            <th className='thdT2'>Email</th>
+                                            <th className='thdT2'>Consulta</th>
                                             <th className='thdT2'>Nombre </th>
                                             <th className='thdT2'>Apellidos</th>
-                                            <th className='thdT2'>Rol</th>
+                                            <th className='thdT2'>Fecha</th>
                                             <th className='thdT2'>Ver</th>
                                             <th className='thdT2'>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {filteredData.map((user) => (
-                                            <tr className='trT2' key={user.UserID}>
-                                                <td className='tdT2'>{user.Email}</td>
-                                                <td className='tdT2'>{user.Nombre}</td>
-                                                <td className='tdT2'>{user.ApellidoP + ' ' + user.ApellidoM}</td>
-                                                <td className='tdT2'>{user.Rol}</td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => viewUserInfo(user)}><FaEye /></td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => DeleteUSR(user)}><FaTrash /></td>
+                                        {filteredData.map((consult) => (
+                                            <tr className='trT2' key={consult.NumeroExpediente}>
+                                                <td className='tdT2'>{consult.NumeroExpediente}</td>
+                                                <td className='tdT2'>{consult.Nombre}</td>
+                                                <td className='tdT2'>{consult.ApellidoP + ' ' + consult.ApellidoM}</td>
+                                                <td className='tdT2'>{new Date(consult.Fecha).toLocaleDateString('es-ES')}</td>
+                                                <td id="ICON_Table" className='tdT2' onClick={() => viewUserInfo(consult)}><FaEye /></td>
+                                                <td id="ICON_Table" className='tdT2' onClick={() => DeleteUSR(consult)}><FaTrash /></td>
                                             </tr>
                                         ))}
                                     </tbody>

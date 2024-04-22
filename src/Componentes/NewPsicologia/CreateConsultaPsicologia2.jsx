@@ -65,11 +65,14 @@ const CreateConsultaPsicologia2 = () => {
 
 
   const AddNewConsult = async () => {
+    const fecha = new Date();
+    const formattedFecha = fecha.toISOString().split('T')[0];
+
     try {
       const JSON_Consult = {
         UserID: UID,
-        Fecha: "",
-        ID_Delegacion: "",
+        Fecha: formattedFecha,
+        ID_Delegacion: SelectedDelegacion,
         ID_Centro: pacienteData.ID_Centro,
         Nombre: pacienteData.Nombre,
         ApellidoP: pacienteData.ApellidoP,
@@ -79,7 +82,7 @@ const CreateConsultaPsicologia2 = () => {
         Motivo: Motivo,
       };
 
-      const response = await axios.post(backendUrl + '/AppConnection/Users/InformationPersonal', JSON_Consult);
+      const response = await axios.post(backendUrl + '/AppConnection/Psicologia/Consulta', JSON_Consult);
       if (response.status === 200) {
         //construir un pdf y descargar
        
