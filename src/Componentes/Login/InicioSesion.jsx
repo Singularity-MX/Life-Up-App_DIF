@@ -119,12 +119,38 @@ function InicioSesion() {
         localStorage.setItem('Email', responseData.Email);
         localStorage.setItem('CID', responseData.ID_Centro);
         localStorage.setItem('Rol', responseData.Rol);
-        
+      
+        console.log(responseData.Rol);
+   
+        //Valir si es psicologa
+        if (responseData.Rol == 'Psicología') {
+          // Hacer una solicitud GET al backend
+          const response = await axios.get(`${backendUrl}/AppConnection/Psicologia/Resmen/${responseData.UserID}`);
+          const DataResumen = response.data;
+          console.log(DataResumen);
 
-        const role = responseData.role;
-        const id_personal = responseData.ID;
+          if (response.status === 200) {
+            navigate('/Home/Psicologia' , { state: DataResumen });
+          }
+       
+        }
+        //Validar si es enfermeria
+        if (responseData.Rol == 'Enfermería') {
+          // Hacer una solicitud GET al backend
+         const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
+         const DataResumen = response.data;
+         console.log(DataResumen);
+          if (response.status === 200) {
+            navigate('/Home/Enferemeria' , { state: DataResumen });
+          }
+       
+        }
 
-        navigate('/MenuApp', { state: { ID_PERSONAL: id_personal, Rol: role } });
+        //else{
+          //navigate('/MenuApp');
+        //}
+
+       
         // Manejar la lógica basada en roles
         /*  
           if (role === 'Administración') {

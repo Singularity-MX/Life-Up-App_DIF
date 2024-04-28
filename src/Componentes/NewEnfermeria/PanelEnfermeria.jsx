@@ -19,7 +19,7 @@ import HeaderApp from '../Header/Header';
 
 
 
-const PanelPsicologia = () => {
+const PanelEnfermeria = () => {
 
     const [consultas, setConsultas] = useState([]);
     const navigate = useNavigate();
@@ -96,7 +96,7 @@ const PanelPsicologia = () => {
             navigate("/Login");
         }
         console.log(Rol);
-        if (Rol !== 'Psicología') {
+        if (Rol !== 'Enfermería') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");
         }
@@ -269,4 +269,4 @@ const PanelPsicologia = () => {
     );
 };
 
-export default PanelPsicologia;
+export default PanelEnfermeria;

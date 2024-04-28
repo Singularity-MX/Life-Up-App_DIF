@@ -1,0 +1,25 @@
+.unauthorized-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .unauthorized-content {
+    text-align: center;
+  }
+  
+  .unauthorized-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .unauthorized-content p {
+    margin-bottom: 0.5rem;
+  }
+  
+  .unauthorized-content a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  

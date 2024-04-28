@@ -112,6 +112,12 @@ import CreateConsultaPsicologia2 from './Componentes/NewPsicologia/CreateConsult
 import ViewBoleta from './Componentes/NewPsicologia/ViewBoleta';
 
 
+import UnauthorizedPage from './Componentes/PageNoAutorized/Unauthorized';
+import HomePsicologia from './Componentes/NewPsicologia/HomePsicologia';
+import HomeEnfermeria from './Componentes/NewEnfermeria/HomeEnfermeria';
+import PanelEnfermeria from './Componentes/NewEnfermeria/PanelEnfermeria';
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -376,7 +382,23 @@ const router = createBrowserRouter([
   element: <ViewBoleta/>,
 },
 
+{
+  path: "/PageNotFound",
+  element: <UnauthorizedPage/>,
+},
 
+{
+  path: "/Home/Psicologia",
+  element: <HomePsicologia/>,
+},
+{
+  path: "/Home/Enferemeria",
+  element: <HomeEnfermeria/>,
+},
+{
+  path: "/PanelEnfermeria",
+  element: <PanelEnfermeria/>,
+},
 
 ]);
 

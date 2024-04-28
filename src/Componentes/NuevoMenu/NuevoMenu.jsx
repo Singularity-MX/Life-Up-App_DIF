@@ -20,9 +20,7 @@ const NewMenuApplication = () => {
     function GoUser() {
         navigate('/MenuUsers');
     }
-    function GoPsicologia() {
-        navigate('/PanelPsicologia');
-    }
+   
     function GoEnfermeria() {
         navigate('/MenuEnfermeria');
     }
@@ -33,10 +31,20 @@ const NewMenuApplication = () => {
         navigate('/MenuEstadistica');
     }
 
+    //sdministrador
     function GoUserAdmin() {
         navigate('/DashboardRoles');
     }
 
+    //psicologia
+    function GoPsicologia() {
+        navigate('/PanelPsicologia');
+    }
+
+    //enfermeria
+    function GoEnfermeria() {
+        navigate('/PanelEnfermeria');
+    }
 
     function GoLogOut() {
         navigate("/loader-Login");
@@ -56,18 +64,7 @@ const NewMenuApplication = () => {
                             <label className='txtBTN'>Panel de administrador</label>
                         </div>
                        
-                        <div className='optionBtn' onClick={GoPsicologia}>
-                            <label className='txtBTN'>Psicología</label>
-                        </div>
-                        <div className='optionBtn' onClick={GoEnfermeria}>
-                            <label className='txtBTN'>Enfermería</label>
-                        </div>
-                        <div className='optionBtn' onClick={GoTalleres}>
-                            <label className='txtBTN'>Talleres</label>
-                        </div>
-                        <div className='optionBtn' onClick={GoEstadistica}>
-                            <label className='txtBTN'>Estadística general</label>
-                        </div>
+                      
                         <div className='optionBtn' onClick={GoLogOut}>
                             <label className='txtBTN'>Cerrar sesión</label>
                         </div>
@@ -76,6 +73,16 @@ const NewMenuApplication = () => {
                 {rol === 'Psicología' && (
                     <>
                         <div className='optionBtn' onClick={GoPsicologia}>
+                            <label className='txtBTN'>Consultas</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoLogOut}>
+                            <label className='txtBTN'>Cerrar sesión</label>
+                        </div>
+                    </>
+                )}
+                {rol === 'Enfermería' && (
+                    <>
+                        <div className='optionBtn' onClick={GoEnfermeria}>
                             <label className='txtBTN'>Consultas</label>
                         </div>
                         <div className='optionBtn' onClick={GoLogOut}>
