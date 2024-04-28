@@ -15,9 +15,10 @@ import '../../GlobalStyles/Resources.css';
 
 import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
-const CreateConsultaPsicologia = () => {
+const CreateConsultaEnfermeria1 = () => {
   const UID = localStorage.getItem('UID');
   const GetCID = localStorage.getItem('CID');
+  const Rol = localStorage.getItem('Rol');
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const [Nombre, setNombre] = useState('');
@@ -32,7 +33,7 @@ const CreateConsultaPsicologia = () => {
       navigate("/Login");
   }
   console.log(Rol);
-  if (Rol !== 'Psicología') {
+  if (Rol !== 'Enfermería') {
    //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
   }
@@ -48,7 +49,7 @@ const CreateConsultaPsicologia = () => {
       Edad: Edad,
       ID_Centro: GetCID
     };
-    navigate('/Nueva-cosulta-psicologia-informacion', { state: pacienteData });
+    navigate('/Enfermeria/Consulta/Create/2', { state: pacienteData });
     
   };
 
@@ -150,4 +151,4 @@ const handleEdadChange = (e) => {
 
 };
 
-export default CreateConsultaPsicologia;
+export default CreateConsultaEnfermeria1;

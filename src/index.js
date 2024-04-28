@@ -116,7 +116,9 @@ import UnauthorizedPage from './Componentes/PageNoAutorized/Unauthorized';
 import HomePsicologia from './Componentes/NewPsicologia/HomePsicologia';
 import HomeEnfermeria from './Componentes/NewEnfermeria/HomeEnfermeria';
 import PanelEnfermeria from './Componentes/NewEnfermeria/PanelEnfermeria';
-
+import CreateConsultaEnfermeria1 from './Componentes/NewEnfermeria/CreateConsultaEnfermeria';
+import CreateConsultaEnfermeria2 from './Componentes/NewEnfermeria/CreateConsultaEnfermeria2';
+import ViewBoletaEnfermeria from './Componentes/NewEnfermeria/ViewBoleta';
 
 const router = createBrowserRouter([
   {
@@ -399,6 +401,19 @@ const router = createBrowserRouter([
   path: "/PanelEnfermeria",
   element: <PanelEnfermeria/>,
 },
+{
+  path: "/Enfermeria/Consulta/Create/1",
+  element: <CreateConsultaEnfermeria1/>,
+},
+{
+  path: "/Enfermeria/Consulta/Create/2",
+  element: <CreateConsultaEnfermeria2/>,
+},
+{
+  path: "/Enfermeria/Boleta",
+  element: <ViewBoletaEnfermeria/>,
+},
+
 
 ]);
 

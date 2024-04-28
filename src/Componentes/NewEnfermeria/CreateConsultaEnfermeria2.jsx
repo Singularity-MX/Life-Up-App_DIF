@@ -18,7 +18,7 @@ import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
 import { useLocation } from 'react-router-dom';
 
-const CreateConsultaPsicologia2 = () => {
+const CreateConsultaEnfermeria2 = () => {
   const location = useLocation();
   const { state: pacienteData } = location;
 
@@ -27,6 +27,7 @@ const CreateConsultaPsicologia2 = () => {
   //obtener el NewUserID del local storage
   const UID = localStorage.getItem('UID');
   const GetCID = localStorage.getItem('CID');
+  const Rol = localStorage.getItem('Rol');
   //Recibir el state del navigate
 
 
@@ -42,8 +43,12 @@ const CreateConsultaPsicologia2 = () => {
   const [SelectedDelegacion, setSelectedDelegacion] = useState('');
   const [Motivo, setMotivo] = useState('');
 
-  function GoPsicologia() {
-    navigate('/PanelPsicologia');
+  const [Presion, setPresion] = useState('');
+  const [Temperatura, setTemperatura] = useState('');
+  const [RitmoCardiaco, setRitmoCardiaco] = useState('');
+
+  function GoEnfermeria() {
+    navigate('/PanelEnfermeria');
   }
 
   useEffect(() => {
@@ -51,7 +56,7 @@ const CreateConsultaPsicologia2 = () => {
       navigate("/Login");
   }
   console.log(Rol);
-  if (Rol !== 'Psicología') {
+  if (Rol !== 'Enfermería') {
    //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
   }
@@ -85,11 +90,14 @@ const CreateConsultaPsicologia2 = () => {
         ApellidoP: pacienteData.ApellidoP,
         ApellidoM: pacienteData.ApellidoM,
         Edad: pacienteData.Edad,
-        Telefono: Telefono,
-        Motivo: Motivo,
+        PresionArterial: Presion,
+        Temperatura: Temperatura,
+        RitmoCardiaco: RitmoCardiaco,
       };
 
-      const response = await axios.post(backendUrl + '/AppConnection/Psicologia/Consulta', JSON_Consult);
+
+     
+      const response = await axios.post(backendUrl + '/AppConnection/Enfermeria/Consulta', JSON_Consult);
       if (response.status === 200) {
         //construir un pdf y descargar
        
@@ -101,7 +109,7 @@ const CreateConsultaPsicologia2 = () => {
           showConfirmButton: true,
         }).then((result) => {
           if (result.isConfirmed) {
-            GoPsicologia();
+            GoEnfermeria();
           }
         });
 
@@ -113,44 +121,48 @@ const CreateConsultaPsicologia2 = () => {
         });
       }
 
+      
+
       // Handle success, navigate, show alert, etc.
     } catch (error) {
       console.error('Error:', error);
       // Handle error, show alert, etc.
     }
+
+    
   };
 
 
   const confirmInformation = () => {
-     //validar si los campos estan vacioss
-    if (Telefono === '' || SelectedDelegacion === '' || Motivo === '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Por favor, llene todos los campos con la información solicitada',
-      });
-      return;
-    }
-    //validar si el tel es un numero y a 10 digitos
-    if (Telefono.length !== 10) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El número de teléfono debe tener 10 dígitos',
-      });
-      return;
-    }
-    //validar si el tel es un numero
-    if (isNaN(Telefono)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El número de teléfono debe ser un número',
-
-      });
-      return;
-    }
-    
+  
+          //validar que Presin tenga la forma 190/30 es decir 3numeros/2numeros
+          if (!Presion.match(/^\d{3}\/\d{2}$/)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'La presión arterial debe tener el formato correcto',
+            });
+            return;
+          }
+         
+          //validar que temperatura sea un decimal
+          if (isNaN(Temperatura)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'La temperatura debe ser un número',
+            });
+            return;
+          }
+          //validar que el ritmo cardiaco sea un numero
+          if (isNaN(RitmoCardiaco)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El ritmo cardiaco debe ser un número',
+            });
+            return;
+          }
     
 
     //mostrar un swal  si desdea continuar
@@ -186,10 +198,7 @@ const CreateConsultaPsicologia2 = () => {
 
 
 
-<div className='containerInputLabel'>
-  <label className='labelInput'>Ingresa su telefono:</label>
-  <input class="inputGlobal" placeholder="Numero de contacto" type="text" value={Telefono} onChange={e => setTelefono(e.target.value)} required />
-</div>
+
 
 <div className="containerInputLabel">
   <label className="labelInput">Elige la delegación:</label>
@@ -211,8 +220,18 @@ const CreateConsultaPsicologia2 = () => {
 </div>
 
 <div className='containerInputLabel'>
-  <label className='labelInput'>Motivo de intervención:</label>
-  <textarea class="inputGlobal" value={Motivo}onChange={e => setMotivo(e.target.value)} required/>
+  <label className='labelInput'>Presión arterial(mm Hg):</label>
+  <input class="inputGlobal" placeholder="Ejemplo: 190/30" type="text" value={Presion} onChange={e => setPresion(e.target.value)} required />
+</div>
+
+<div className='containerInputLabel'>
+  <label className='labelInput'>Temperatura(C°):</label>
+  <input class="inputGlobal" placeholder="Ejemplo: 38.5" type="text" value={Temperatura} onChange={e => setTemperatura(e.target.value)} required />
+</div>
+
+<div className='containerInputLabel'>
+  <label className='labelInput'>Ritmo Cardíaco(LPM):</label>
+  <input class="inputGlobal" placeholder="Ejemplo: 62" type="number" value={RitmoCardiaco} onChange={e => setRitmoCardiaco(e.target.value)} required />
 </div>
 
 
@@ -226,4 +245,4 @@ const CreateConsultaPsicologia2 = () => {
 
 };
 
-export default CreateConsultaPsicologia2;
+export default CreateConsultaEnfermeria2;

@@ -59,9 +59,11 @@ const PanelEnfermeria = () => {
             html: `
              
                 
-                <p><strong>Nombre:</strong> ${user.NombrePaciente + ' ' + user.ApellidoPPaciente + ' ' + user.ApellidoMPaciente} </p>
-                <p><strong>Motivo:</strong> ${user.Motivo}</p>
-                <p><strong>Fecha:</strong> ${formattedDate}</p>
+                <p><strong>Nombre:</strong> ${user.Nombre + ' ' + user.ApellidoP + ' ' + user.ApellidoM} </p>
+                <p><strong>Edad:</strong> ${user.Edad}</p>
+                <p><strong>Presión arterial:</strong> ${user.PresionArterial}</p>
+                <p><strong>Temperatura:</strong> ${user.Temperatura} C°</p>
+                <p><strong>Ritmo Cardíaco:</strong> ${user.RitmoCardiaco} LPM</p>
                 
 
                 <style>
@@ -84,7 +86,7 @@ const PanelEnfermeria = () => {
         const Fecha = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
         user.Fecha = Fecha;
 
-        navigate("/Psicologia/Boleta", { state: user });
+        navigate("/Enfermeria/Boleta", { state: user });
     };
 
 
@@ -103,7 +105,7 @@ const PanelEnfermeria = () => {
 
         const fetchConsultas = async () => {
             try {
-                const response = await axios.get(`${backendUrl}/AppConnection/Psicologia/Consulta/`+UID, {
+                const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Consulta/`+UID, {
                     
                 }, {
                     headers: {
@@ -127,7 +129,7 @@ const PanelEnfermeria = () => {
     }, [backendUrl, CID]);
 
     function NuevaConsulta() {
-        navigate("/Nueva-cosulta-psicologia");
+        navigate("/Enfermeria/Consulta/Create/1");
     }
     function GoLogOut() {
         navigate("/LoginSU");
@@ -151,32 +153,15 @@ const PanelEnfermeria = () => {
             confirmButtonText: 'Sí, eliminarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                RequestDeleteINFO(user.NumeroExpediente);
+                RequestDeleteUSR(user.NumeroExpediente);
             }
         })
     };
 
-    const RequestDeleteINFO = async (ID) => {
-        try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Users/InformationPersonal/` + ID, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.status === 200) {
-                RequestDeleteUSR(ID);
-            } else {
-                console.error('Error al eliminar el usuario');
-            }
-        } catch (error) {
-            console.error('Error al enviar la solicitud:', error.message);
-        }
-    }
 
     const RequestDeleteUSR = async (ID) => {
         try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Psicologia/Consulta/` + ID, {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Enfermeria/Consulta/` + ID, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -206,7 +191,7 @@ const PanelEnfermeria = () => {
 
     // Filtrar los datos por el nombre
     const filteredData = consultas.filter(item =>
-        item.NombrePaciente.toLowerCase().includes(searchTerm.toLowerCase())
+        item.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -249,8 +234,8 @@ const PanelEnfermeria = () => {
                                         {filteredData.map((consult) => (
                                             <tr className='trT2' key={consult.NumeroExpediente}>
                                                 <td className='tdT2'>{consult.NumeroExpediente}</td>
-                                                <td className='tdT2'>{consult.NombrePaciente}</td>
-                                                <td className='tdT2'>{consult.ApellidoPPaciente + ' ' + consult.ApellidoMPaciente}</td>
+                                                <td className='tdT2'>{consult.Nombre}</td>
+                                                <td className='tdT2'>{consult.ApellidoP + ' ' + consult.ApellidoM}</td>
                                                 <td className='tdT2'>{new Date(consult.Fecha).toLocaleDateString('es-ES')}</td>
                                                 <td id="ICON_Table" className='tdT2' onClick={() => viewUserInfo(consult)}><FaEye /></td>
                                                 <td id="ICON_Table" className='tdT2' onClick={() => goBoleta(consult)}><FaFile /></td>

@@ -23,7 +23,10 @@ import { useLocation } from "react-router-dom";
 
 
 
-const ViewBoleta = () => {
+const ViewBoletaEnfermeria = () => {
+
+
+
 
     // Obtener la ubicación actual
     const location = useLocation();
@@ -39,7 +42,21 @@ const ViewBoleta = () => {
     const Rol = localStorage.getItem('Rol');
     const EmailPersonal = localStorage.getItem('Email');
 
+    useEffect(() => {
 
+        //validar si estas logeado y en caso de que si, validar que eres psicologo
+
+        if (UID === null) {
+            navigate("/Login");
+        }
+        console.log(Rol);
+        if (Rol !== 'Enfermería') {
+         //navegar a pagina de falta de permisos
+            navigate("/PageNotFound");
+        }
+
+
+    }, [backendUrl, CID]);
     
 
 
@@ -57,16 +74,17 @@ const ViewBoleta = () => {
                 <div className="contenido">
                     <div className="containerBoletaPsicologia">
                         <BoletaConsultaComponente
-                            Nombre= {user.NombrePaciente}
-                            ApellidoP={user.ApellidoPPaciente}
-                            ApellidoM={user.ApellidoMPaciente}
+                            Nombre= {user.Nombre}
+                            ApellidoP={user.ApellidoP}
+                            ApellidoM={user.ApellidoM}
                             Edad={user.Edad}
-                            Telefono={user.Telefono}
                             Ciudad="León, Guanajuato"
                             Fecha={user.Fecha}
-                            Centro={user.NombreCentro}
-                            Psicologa={EmailPersonal}
-                            Motivo={user.Motivo}
+                            Centro={user.ID_Centro}
+                            Enfermera={EmailPersonal}
+                            PresionArterial={user.PresionArterial}
+                            Temperatura={user.Temperatura}
+                            RitmoCardiaco={user.RitmoCardiaco}
                             ConsultaID={user.Expediente_ID}
                             Expediente = {user.NumeroExpediente}
                         />
@@ -78,4 +96,4 @@ const ViewBoleta = () => {
     );
 };
 
-export default ViewBoleta;
+export default ViewBoletaEnfermeria;

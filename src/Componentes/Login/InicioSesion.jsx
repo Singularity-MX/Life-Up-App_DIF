@@ -146,9 +146,9 @@ function InicioSesion() {
        
         }
 
-        //else{
-          //navigate('/MenuApp');
-        //}
+        else{
+        navigate('/MenuApp');
+        }
 
        
         // Manejar la lógica basada en roles
