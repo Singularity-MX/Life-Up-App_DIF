@@ -27,6 +27,7 @@ const CreateConsultaPsicologia2 = () => {
   //obtener el NewUserID del local storage
   const UID = localStorage.getItem('UID');
   const GetCID = localStorage.getItem('CID');
+  const Rol = localStorage.getItem('Rol');
   //Recibir el state del navigate
 
 
