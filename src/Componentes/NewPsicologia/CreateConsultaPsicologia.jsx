@@ -18,6 +18,7 @@ import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 const CreateConsultaPsicologia = () => {
   const UID = localStorage.getItem('UID');
   const GetCID = localStorage.getItem('CID');
+  const Rol = localStorage.getItem('Rol');
   const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const [Nombre, setNombre] = useState('');
