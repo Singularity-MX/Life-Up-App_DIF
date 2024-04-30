@@ -96,7 +96,7 @@ function InicioSesion() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    
+
     //-------------> Pasar el Hash de la contraseña
     //alert('user: ' + email + ' pass: ' + password);
     //alert(email +" -> " +password)
@@ -114,14 +114,14 @@ function InicioSesion() {
       // Verificar el estado de la respuesta
       if (response.status === 200) {
         const responseData = await response.json();
-        
+
         localStorage.setItem('UID', responseData.UserID);
         localStorage.setItem('Email', responseData.Email);
         localStorage.setItem('CID', responseData.ID_Centro);
         localStorage.setItem('Rol', responseData.Rol);
-      
+
         console.log(responseData.Rol);
-   
+
         //Valir si es psicologa
         if (responseData.Rol == 'Psicología') {
           // Hacer una solicitud GET al backend
@@ -130,27 +130,42 @@ function InicioSesion() {
           console.log(DataResumen);
 
           if (response.status === 200) {
-            navigate('/Home/Psicologia' , { state: DataResumen });
+            navigate('/Home/Psicologia', { state: DataResumen });
           }
-       
+
         }
         //Validar si es enfermeria
         if (responseData.Rol == 'Enfermería') {
           // Hacer una solicitud GET al backend
-         const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
-         const DataResumen = response.data;
-         console.log(DataResumen);
+          const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
+          const DataResumen = response.data;
+          console.log(DataResumen);
           if (response.status === 200) {
-            navigate('/Home/Enferemeria' , { state: DataResumen });
+            navigate('/Home/Enferemeria', { state: DataResumen });
           }
-       
+
         }
 
+        //Validar si es enfermeria
+        if (responseData.Rol == 'Administrador') {
+          navigate('/MenuApp');
+          // Hacer una solicitud GET al backend
+          /*const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
+          const DataResumen = response.data;
+          console.log(DataResumen);
+           if (response.status === 200) {
+             navigate('/Home/Enferemeria' , { state: DataResumen });
+           }
+        */
+        }
+
+        /*
         else{
         navigate('/MenuApp');
         }
+        */
 
-       
+
         // Manejar la lógica basada en roles
         /*  
           if (role === 'Administración') {
@@ -200,7 +215,7 @@ function InicioSesion() {
     navigate("/LoginSU");
   }
 
-  
+
 
   //-----------------------------------------------------------------return
   return (
@@ -218,17 +233,17 @@ function InicioSesion() {
         <div id='contenedor_Menu_top'>
           <div id='Option' onClick={handleUserAdmin}><p>Administrador</p></div>
         </div>
-        <img src={LogoLogin} id='IconoLoginForm' preload="true"/>
+        <img src={LogoLogin} id='IconoLoginForm' preload="true" />
 
         <animated.h1 style={fade} id="TitleLogin">Iniciar Sesión</animated.h1>
 
         <p>¡Inicia sesión para acceder a todas las funciones!</p>
         <form onSubmit={onSubmit}>
           <input id="inpt_Login" type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="usuario" placeholder='Correo electrónico' />
-          <input id="inpt_Login" type={showPassword ? 'text' : 'password'} value={password2} onChange={(e) => setPassword(e.target.value)}  name="password" placeholder='Contraseña'  />
+          <input id="inpt_Login" type={showPassword ? 'text' : 'password'} value={password2} onChange={(e) => setPassword(e.target.value)} name="password" placeholder='Contraseña' />
           <button type="button" onClick={handleTogglePassword} className='btnShow'>
-                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="ico_show" /> {showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-              </button>
+            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="ico_show" /> {showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+          </button>
           <button className='buttonLogin'>Iniciar Sesión</button>
         </form>
       </animated.div>
