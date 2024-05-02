@@ -25,7 +25,7 @@ const NewMenuApplication = () => {
         navigate('/MenuEnfermeria');
     }
     function GoTalleres() {
-        navigate('/MenuTalleres');
+        navigate('/PanelTalleres/Admin');
     }
     function GoEstadistica() {
         navigate('/MenuEstadistica');
@@ -69,7 +69,7 @@ const NewMenuApplication = () => {
                         <div className='optionBtn' onClick="#" >
                             <label className='txtBTN'>Enfermería</label>
                         </div>
-                        <div className='optionBtn' onClick={GoUserAdmin}>
+                        <div className='optionBtn' onClick={GoTalleres}>
                             <label className='txtBTN'>Talleres y actividades</label>
                         </div>
                       

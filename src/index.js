@@ -120,6 +120,9 @@ import CreateConsultaEnfermeria1 from './Componentes/NewEnfermeria/CreateConsult
 import CreateConsultaEnfermeria2 from './Componentes/NewEnfermeria/CreateConsultaEnfermeria2';
 import ViewBoletaEnfermeria from './Componentes/NewEnfermeria/ViewBoleta';
 
+import PanelTalleres from './Componentes/AdminUsers/Talleres/PanelTalleres';
+import CreateTaller1 from './Componentes/AdminUsers/Talleres/CreateTaller1';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -413,6 +416,17 @@ const router = createBrowserRouter([
   path: "/Enfermeria/Boleta",
   element: <ViewBoletaEnfermeria/>,
 },
+
+
+{
+  path: "/PanelTalleres/Admin",
+  element: <PanelTalleres/>,
+},
+{
+  path: "/PanelTalleres/Create",
+  element: <CreateTaller1/>,
+},
+
 
 
 ]);
