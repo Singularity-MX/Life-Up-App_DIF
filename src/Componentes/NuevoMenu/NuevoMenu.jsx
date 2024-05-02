@@ -63,7 +63,15 @@ const NewMenuApplication = () => {
                         <div className='optionBtn' onClick={GoUserAdmin}>
                             <label className='txtBTN'>Panel de administrador</label>
                         </div>
-                       
+                        <div className='optionBtn' onClick="#" >
+                            <label className='txtBTN'>Psicología</label>
+                        </div>
+                        <div className='optionBtn' onClick="#" >
+                            <label className='txtBTN'>Enfermería</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoUserAdmin}>
+                            <label className='txtBTN'>Talleres y actividades</label>
+                        </div>
                       
                         <div className='optionBtn' onClick={GoLogOut}>
                             <label className='txtBTN'>Cerrar sesión</label>
