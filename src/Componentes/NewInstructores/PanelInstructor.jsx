@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import backendUrl from '../../../serverConfig';
+import backendUrl from '../../serverConfig';
 import axios from 'axios';
 
 //import '../../GlobalStyles/Resources.css';
 //import './styleDash.css';
 //import './Style/AdminUser.css';
 
+import logo from '../../GlobalStyles/images/logo.svg';
+import imagen from '../../GlobalStyles/images/image1.png';
 
-import NewMenuApplication from '../../NuevoMenu/NuevoMenu';
-import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile } from 'react-icons/fa';
-
-
-import HeaderApp from '../../Header/Header';
-
+import NewMenuApplication from '../NuevoMenu/NuevoMenu';
+import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile} from 'react-icons/fa';
 
 
-const PanelTalleres = () => {
+import HeaderApp from '../Header/Header';
 
-    const [talleres, setTalleres] = useState([]);
+
+
+const PanelInstructor = () => {
+
+    const [consultas, setAsistencias] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
 
@@ -57,11 +59,9 @@ const PanelTalleres = () => {
             html: `
              
                 
-                <p><strong>Nombre:</strong> ${user.Nombre + ' ' + user.ApellidoP + ' ' + user.ApellidoM} </p>
-                <p><strong>Edad:</strong> ${user.Edad}</p>
-                <p><strong>Presión arterial:</strong> ${user.PresionArterial}</p>
-                <p><strong>Temperatura:</strong> ${user.Temperatura} C°</p>
-                <p><strong>Ritmo Cardíaco:</strong> ${user.RitmoCardiaco} LPM</p>
+                <p><strong>Nombre:</strong> ${user.NombrePaciente + ' ' + user.ApellidoPPaciente + ' ' + user.ApellidoMPaciente} </p>
+                <p><strong>Motivo:</strong> ${user.Motivo}</p>
+                <p><strong>Fecha:</strong> ${formattedDate}</p>
                 
 
                 <style>
@@ -76,15 +76,15 @@ const PanelTalleres = () => {
         });
     };
 
-    const goBoleta = (taller) => {
+    const goBoleta = (user) => {
 
-        const dateObject = new Date(taller.Fecha);
+        const dateObject = new Date(user.Fecha);
     
         // Formatear la fecha
         const Fecha = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
-        taller.Fecha = Fecha;
+        user.Fecha = Fecha;
 
-        navigate("/PanelTalleres/View/Taller", { state: taller });
+        navigate("/Psicologia/Boleta", { state: user });
     };
 
 
@@ -96,14 +96,14 @@ const PanelTalleres = () => {
             navigate("/Login");
         }
         console.log(Rol);
-        if (Rol !== 'Administrador') {
+        if (Rol !== 'Instructor') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");
         }
 
         const fetchConsultas = async () => {
             try {
-                const response = await axios.get(`${backendUrl}/AppConnection/Talleres/`+CID, {
+                const response = await axios.get(`${backendUrl}/AppConnection/Talleres/Asistencias/`+UID, {
                     
                 }, {
                     headers: {
@@ -113,7 +113,7 @@ const PanelTalleres = () => {
 
                 if (response.status === 200) {
                     console.log(response.data);
-                    setTalleres(response.data);
+                    setAsistencias(response.data);
                     //console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
@@ -126,8 +126,8 @@ const PanelTalleres = () => {
         fetchConsultas();
     }, [backendUrl, CID]);
 
-    function Nuevo_taller() {
-        navigate("/PanelTalleres/Create");
+    function RegistrarAsistencias() {
+        navigate("/PanelInstructor/Asistencia/Create");
     }
     function GoLogOut() {
         navigate("/LoginSU");
@@ -135,14 +135,14 @@ const PanelTalleres = () => {
     const DeleteUser = () => {
         navigate("/DeleteUserPersonal");
     }
-    const GoReasignar = (taller) => {
-        navigate("/PanelTalleres/Reasignar", { state: taller });
+    const ModifyUser = () => {
+        navigate("/EditUserPersonal");
     }
 
-    const DeleteTaller = (taller) => {
+    const DeleteAsistencia = (data) => {
         //Confirmar con un swal si se desea eliminar el usuario
         Swal.fire({
-            title: '¿Estás seguro de eliminar este taller?',
+            title: '¿Estás seguro de eliminar este registro?',
             text: "No podrás revertir esto!",
             icon: 'warning',
             showCancelButton: true,
@@ -151,15 +151,32 @@ const PanelTalleres = () => {
             confirmButtonText: 'Sí, eliminarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                RequestDeleteUSR(taller.TallerID);
+                RequestDeleteINFO(data.AsistenciaID);
             }
         })
     };
 
+    const RequestDeleteINFO = async (ID) => {
+        try {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Talleres/Asistencia/` + ID, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                RequestDeleteUSR(ID);
+            } else {
+                console.error('Error al eliminar el usuario');
+            }
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error.message);
+        }
+    }
 
     const RequestDeleteUSR = async (ID) => {
         try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Talleres/` + ID, {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Psicologia/Consulta/` + ID, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -168,8 +185,8 @@ const PanelTalleres = () => {
             if (response.status === 200) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Taller eliminado',
-                    text: 'El taller ha sido eliminado correctamente',
+                    title: 'Asistencia eliminada',
+                    text: 'La consulta ha sido eliminada correctamente',
                     showConfirmButton: true,
                     timer: 1500
                 });//cuando se cierre el mensaje se recargara la pagina
@@ -188,8 +205,8 @@ const PanelTalleres = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     // Filtrar los datos por el nombre
-    const filteredData = talleres.filter(item =>
-        item.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredData = consultas.filter(item =>
+        item.NombreTaller.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -200,13 +217,13 @@ const PanelTalleres = () => {
 
             <div className="container-Body">
                 <div className="headerInfo">
-                    <HeaderApp titulo="Talleres" />
+                    <HeaderApp titulo="Asistencias" />
                 </div>
                 <div className="contenido">
                     <div className="tableContainer">
                         <div className="containerCardTable">
                             <div className="elementsTopContainer">
-                                <h1 className='TitleTable' onClick={Nuevo_taller}>Agregar nuevo</h1>
+                                <h1 className='TitleTable' onClick={RegistrarAsistencias}>Registrar asistencia</h1>
                                 <input
                                     type="text"
                                     placeholder="Buscar por nombre"
@@ -219,32 +236,24 @@ const PanelTalleres = () => {
                                 <table className='tableT2'>
                                     <thead className='theadT2'>
                                         <tr className='trT2'>
-                                            <th className='thdT2'>Taller</th>
-                                            <th className='thdT2'>Nombre </th>
-                                            <th className='thdT2'>Días</th>
                                             
-                                            <th className='thdT2'>Horario</th>
-                                            <th className='thdT2'>Cupo</th>
-            
-                                            <th className='thdT2'>Ver mas</th>
-                                            <th className='thdT2'>Re-asignar</th>
+                                            <th className='thdT2'>Taller</th>
+                                            <th className='thdT2'>Asistentes</th>
+                                            <th className='thdT2'>Fecha</th>
+                                                                                        
                                             <th className='thdT2'>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {filteredData.map((consult) => (
-                                            <tr className='trT2' key={consult.NumeroTaller}>
-                                                <td className='tdT2'>{consult.NumeroTaller}</td>
-                                                <td className='tdT2'>{consult.Nombre}</td>
-                                                <td className='tdT2'>{consult.Dias}</td>
+                                            <tr className='trT2' key={consult.AsistenciaID}>
                                                 
-                                                <td className='tdT2'>{consult.Hora}</td>
-                                                <td className='tdT2'>{consult.Cupo} personas</td>
-                                                
-                                                
-                                                <td id="ICON_Table" className='tdT2' onClick={() => goBoleta(consult)}><FaEye /></td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => GoReasignar(consult)}><FaEdit /></td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => DeleteTaller(consult)}><FaTrash /></td>
+                                                <td className='tdT2'>{consult.NombreTaller}</td>
+                                                <td className='tdT2'>{consult.Asistentes} personas</td>
+                                                <td className='tdT2'>{new Date(consult.Fecha).toLocaleDateString('es-ES')}</td>
+                                               
+
+                                                <td id="ICON_Table" className='tdT2' onClick={() => DeleteAsistencia(consult)}><FaTrash /></td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -259,4 +268,4 @@ const PanelTalleres = () => {
     );
 };
 
-export default PanelTalleres;
+export default PanelInstructor;

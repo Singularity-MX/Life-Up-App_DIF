@@ -134,6 +134,18 @@ function InicioSesion() {
           }
 
         }
+        //Validar si es instructor
+        if (responseData.Rol == 'Instructor') {
+          // Hacer una solicitud GET al backend
+          const response = await axios.get(`${backendUrl}/AppConnection/Talleres/Resumen/${responseData.UserID}`);
+          const DataResumen = response.data;
+          console.log(DataResumen);
+          if (response.status === 200) {
+            navigate('/PanelInstructor/Home', { state: DataResumen });
+          }
+
+        }
+
         //Validar si es enfermeria
         if (responseData.Rol == 'Enfermería') {
           // Hacer una solicitud GET al backend

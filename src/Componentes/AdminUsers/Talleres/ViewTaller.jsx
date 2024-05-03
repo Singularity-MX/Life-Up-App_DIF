@@ -10,14 +10,14 @@ import axios from 'axios';
 
 
 import NewMenuApplication from '../../NuevoMenu/NuevoMenu';
-import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile } from 'react-icons/fa';
+import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile} from 'react-icons/fa';
 
 
 import HeaderApp from '../../Header/Header';
 
 
 
-const PanelTalleres = () => {
+const ViewTaller = () => {
 
     const [talleres, setTalleres] = useState([]);
     const navigate = useNavigate();
@@ -76,15 +76,15 @@ const PanelTalleres = () => {
         });
     };
 
-    const goBoleta = (taller) => {
+    const goBoleta = (user) => {
 
-        const dateObject = new Date(taller.Fecha);
+        const dateObject = new Date(user.Fecha);
     
         // Formatear la fecha
         const Fecha = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
-        taller.Fecha = Fecha;
+        user.Fecha = Fecha;
 
-        navigate("/PanelTalleres/View/Taller", { state: taller });
+        navigate("/Enfermeria/Boleta", { state: user });
     };
 
 
@@ -135,14 +135,14 @@ const PanelTalleres = () => {
     const DeleteUser = () => {
         navigate("/DeleteUserPersonal");
     }
-    const GoReasignar = (taller) => {
-        navigate("/PanelTalleres/Reasignar", { state: taller });
+    const ModifyUser = () => {
+        navigate("/EditUserPersonal");
     }
 
-    const DeleteTaller = (taller) => {
+    const DeleteUSR = (user) => {
         //Confirmar con un swal si se desea eliminar el usuario
         Swal.fire({
-            title: '¿Estás seguro de eliminar este taller?',
+            title: '¿Estás seguro de eliminar esta consulta?',
             text: "No podrás revertir esto!",
             icon: 'warning',
             showCancelButton: true,
@@ -151,7 +151,7 @@ const PanelTalleres = () => {
             confirmButtonText: 'Sí, eliminarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                RequestDeleteUSR(taller.TallerID);
+                RequestDeleteUSR(user.NumeroExpediente);
             }
         })
     };
@@ -159,7 +159,7 @@ const PanelTalleres = () => {
 
     const RequestDeleteUSR = async (ID) => {
         try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Talleres/` + ID, {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Enfermeria/Consulta/` + ID, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -168,8 +168,8 @@ const PanelTalleres = () => {
             if (response.status === 200) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Taller eliminado',
-                    text: 'El taller ha sido eliminado correctamente',
+                    title: 'Consulta eliminada',
+                    text: 'La consulta ha sido eliminado correctamente',
                     showConfirmButton: true,
                     timer: 1500
                 });//cuando se cierre el mensaje se recargara la pagina
@@ -200,57 +200,12 @@ const PanelTalleres = () => {
 
             <div className="container-Body">
                 <div className="headerInfo">
-                    <HeaderApp titulo="Talleres" />
+                    <HeaderApp titulo="Boletín" />
                 </div>
                 <div className="contenido">
                     <div className="tableContainer">
-                        <div className="containerCardTable">
-                            <div className="elementsTopContainer">
-                                <h1 className='TitleTable' onClick={Nuevo_taller}>Agregar nuevo</h1>
-                                <input
-                                    type="text"
-                                    placeholder="Buscar por nombre"
-                                    className="inputSearch"
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                            </div>
-                            <div className="containerTable">
-                                <table className='tableT2'>
-                                    <thead className='theadT2'>
-                                        <tr className='trT2'>
-                                            <th className='thdT2'>Taller</th>
-                                            <th className='thdT2'>Nombre </th>
-                                            <th className='thdT2'>Días</th>
-                                            
-                                            <th className='thdT2'>Horario</th>
-                                            <th className='thdT2'>Cupo</th>
-            
-                                            <th className='thdT2'>Ver mas</th>
-                                            <th className='thdT2'>Re-asignar</th>
-                                            <th className='thdT2'>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {filteredData.map((consult) => (
-                                            <tr className='trT2' key={consult.NumeroTaller}>
-                                                <td className='tdT2'>{consult.NumeroTaller}</td>
-                                                <td className='tdT2'>{consult.Nombre}</td>
-                                                <td className='tdT2'>{consult.Dias}</td>
-                                                
-                                                <td className='tdT2'>{consult.Hora}</td>
-                                                <td className='tdT2'>{consult.Cupo} personas</td>
-                                                
-                                                
-                                                <td id="ICON_Table" className='tdT2' onClick={() => goBoleta(consult)}><FaEye /></td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => GoReasignar(consult)}><FaEdit /></td>
-                                                <td id="ICON_Table" className='tdT2' onClick={() => DeleteTaller(consult)}><FaTrash /></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                       
+                        
                     </div>
 
                 </div>
@@ -259,4 +214,4 @@ const PanelTalleres = () => {
     );
 };
 
-export default PanelTalleres;
+export default ViewTaller;

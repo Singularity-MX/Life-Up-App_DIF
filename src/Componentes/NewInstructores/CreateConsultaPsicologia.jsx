@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import backendUrl from '../../../serverConfig';
+import backendUrl from '../../serverConfig';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -9,14 +9,13 @@ import Swal from 'sweetalert2';
 import { useSpring, animated } from 'react-spring';
 
 
-//import '../../GlobalStyles/Resources.css';
+import '../../GlobalStyles/Resources.css';
 //import './styleAdd.css';
 
 
-import NewMenuApplication from '../../NuevoMenu/NuevoMenu';
+import NewMenuApplication from '../NuevoMenu/NuevoMenu';
 
-const CreateTaller1 = () => {
-
+const CreateConsultaPsicologia = () => {
   const UID = localStorage.getItem('UID');
   const GetCID = localStorage.getItem('CID');
   const Rol = localStorage.getItem('Rol');
@@ -27,12 +26,6 @@ const CreateTaller1 = () => {
   const [ApellidoM, setApellidoM] = useState('');
   const [Edad, setEdad] = useState('');
 
-
-  const [NombreTaller, setNombreTaller] = useState('');
-  const [HoraInicio, setHoraInicio] = useState('');
-  const [HoraTermino, setHoraTermino] = useState('');
-  const [CupoTaller, setCupoTaller] = useState('');
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +33,7 @@ const CreateTaller1 = () => {
       navigate("/Login");
   }
   console.log(Rol);
-  if (Rol !== 'Administrador') {
+  if (Rol !== 'Psicología') {
    //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
   }
@@ -49,42 +42,28 @@ const CreateTaller1 = () => {
 
 
   const BuildJSON = () => {
-
-    //obtener la duracion en minutos del taller restando la hora de termino menos la de inicio
-    const HoraInicioSplit = HoraInicio.split(':');
-    const HoraTerminoSplit = HoraTermino.split(':');
-    const HoraInicioMinutos = parseInt(HoraInicioSplit[0]) * 60 + parseInt(HoraInicioSplit[1]);
-    const HoraTerminoMinutos = parseInt(HoraTerminoSplit[0]) * 60 + parseInt(HoraTerminoSplit[1]);
-    const DuracionTaller = HoraTerminoMinutos - HoraInicioMinutos;
-
-    //crear la hora concatenando la hora de incio y la de termino de la siguiente manera (13:02 -15:40pm)
-    const HoraDefinida = HoraInicio + ' - ' + HoraTermino;
-
-    const JSON = {
-      Nombre: NombreTaller,
-      CentroID: GetCID,
-      Cupo: CupoTaller,
-      Duracion: DuracionTaller,
-      Hora: HoraDefinida
-
+    const pacienteData = {
+      Nombre: Nombre,
+      ApellidoP: ApellidoP,
+      ApellidoM: ApellidoM,
+      Edad: Edad,
+      ID_Centro: GetCID
     };
-    //console.log(JSON);
-    navigate('/PanelTalleres/Create/Asignacion', { state: JSON });
+    navigate('/Nueva-cosulta-psicologia-informacion', { state: pacienteData });
     
   };
 
   const confirmInformation = () => {
 
-    //validar si los campos estan vacios, NombreTaller, HoraInicio, HoraTermino, CupoTaller
-    if (NombreTaller === '' || HoraInicio === '' || HoraTermino === '' || CupoTaller === '') {
+    //validar si los campos estan vacios
+    if (Nombre === '' || ApellidoP === '' || ApellidoM === '' || Edad === '') {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Todos los campos son obligatorios',
+        title: 'Error',
+        text: 'Por favor, llene todos los campos con la información solicitada',
       });
       return;
     }
-   
     //mostrar un swal  si desdea continuar
     Swal.fire({
       title: '¿Desea continuar?',
@@ -135,30 +114,28 @@ const handleEdadChange = (e) => {
             
             <div className="contenido">
             <div className='formContainer'>
-            <animated.h1 style={fade} className="titleForm">Agregar Taller</animated.h1>
-            
+            <animated.h1 style={fade} className="titleForm">Nueva consulta</animated.h1>
+            <p className='textForm'>Ingrese la información del paciente</p>
 
 
             <div className='containerInputLabel'>
               <label className='labelInput'>Ingresa el nombre:</label>
-              <input class="inputGlobal" placeholder="Nombre del taller" type="text" value={NombreTaller} onChange={e => setNombreTaller(e.target.value)} required />
+              <input class="inputGlobal" placeholder="Nombre(s) del paciente" type="email" value={Nombre} onChange={e => setNombre(e.target.value)} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Selecciona la hora de inicio:</label>
-              <input class="inputGlobal" placeholder="Hora de inicio" type="time" value={HoraInicio} onChange={e => setHoraInicio(e.target.value)} required />
+              <label className='labelInput'>Ingresa el Apellido Paterno:</label>
+              <input class="inputGlobal" placeholder="Apellido Paterno" type="text" value={ApellidoP} onChange={e => setApellidoP(e.target.value)} required />
             </div>
 
             <div className='containerInputLabel'>
-              <label className='labelInput'>Selecciona la hora de término:</label>
-              <input class="inputGlobal" placeholder="Hora de termino" type="time" value={HoraTermino} onChange={e => setHoraTermino(e.target.value)} required />
+              <label className='labelInput'>Ingresa el Apellido Materno:</label>
+              <input class="inputGlobal" placeholder="Apellido Materno" type="text" value={ApellidoM} onChange={e => setApellidoM(e.target.value)} required />
             </div>
 
-          
-
             <div className='containerInputLabel'>
-              <label className='labelInput'>Ingresa el cupo:</label>
-              <input class="inputGlobal" placeholder="Ingresa el cupo del taller" type="number" value={CupoTaller} onChange={e => setCupoTaller(e.target.value)} required />
+              <label className='labelInput'>Ingresa la Edad:</label>
+              <input class="inputGlobal" placeholder="Edad" type="number" value={Edad} onChange={handleEdadChange} required />
             </div>
 
             
@@ -174,4 +151,4 @@ const handleEdadChange = (e) => {
 
 };
 
-export default CreateTaller1;
+export default CreateConsultaPsicologia;

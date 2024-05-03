@@ -49,7 +49,10 @@ const NewMenuApplication = () => {
     function GoLogOut() {
         navigate("/loader-Login");
     }
-
+    function GoInstructores() {
+        navigate('/PanelInstructor/Asistencia');
+    }
+    
     return (
         <div className="menu">
             <img src={Logo} className='logoo' />
@@ -92,6 +95,16 @@ const NewMenuApplication = () => {
                     <>
                         <div className='optionBtn' onClick={GoEnfermeria}>
                             <label className='txtBTN'>Consultas</label>
+                        </div>
+                        <div className='optionBtn' onClick={GoLogOut}>
+                            <label className='txtBTN'>Cerrar sesión</label>
+                        </div>
+                    </>
+                )}
+                    {rol === 'Instructor' && (
+                    <>
+                        <div className='optionBtn' onClick={GoInstructores}>
+                            <label className='txtBTN'>Registrar asistencia</label>
                         </div>
                         <div className='optionBtn' onClick={GoLogOut}>
                             <label className='txtBTN'>Cerrar sesión</label>

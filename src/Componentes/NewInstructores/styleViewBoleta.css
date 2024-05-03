@@ -1,0 +1,16 @@
+.containerBoletaPsicologia{
+    width: 45%;
+    height: 90%;
+
+    max-width: 500px;
+}
+
+.containerCardHome{
+    width: 30%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   min-width: 450px;
+}

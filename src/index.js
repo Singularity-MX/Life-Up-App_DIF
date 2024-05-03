@@ -122,6 +122,14 @@ import ViewBoletaEnfermeria from './Componentes/NewEnfermeria/ViewBoleta';
 
 import PanelTalleres from './Componentes/AdminUsers/Talleres/PanelTalleres';
 import CreateTaller1 from './Componentes/AdminUsers/Talleres/CreateTaller1';
+import CreateTaller2 from './Componentes/AdminUsers/Talleres/CreateTaller2';
+import ViewTaller from './Componentes/AdminUsers/Talleres/ViewTaller';
+
+import PanelInstructor from './Componentes/NewInstructores/PanelInstructor';
+import HomeInstructor from './Componentes/NewInstructores/HomeInstructor';
+import CreateAsistencia from './Componentes/NewInstructores/CreateAsistencia';
+
+import ReasignarTaller from './Componentes/AdminUsers/Talleres/ReasignarTaller';
 
 const router = createBrowserRouter([
   {
@@ -426,7 +434,31 @@ const router = createBrowserRouter([
   path: "/PanelTalleres/Create",
   element: <CreateTaller1/>,
 },
+{
+  path: "/PanelTalleres/Create/Asignacion",
+  element: <CreateTaller2/>,
+},
+{
+  path: "/PanelTalleres/View/Taller",
+  element: <ViewTaller/>,
+},
+{
+  path: "/PanelInstructor/Asistencia",
+  element: <PanelInstructor/>,
+},
+{
+  path: "/PanelInstructor/Home",
+  element: <HomeInstructor/>,
+},
+{
+  path: "/PanelInstructor/Asistencia/Create",
+  element: <CreateAsistencia/>,
+},
 
+{
+  path: "/PanelTalleres/Reasignar",
+  element: <ReasignarTaller/>,
+},
 
 
 ]);
