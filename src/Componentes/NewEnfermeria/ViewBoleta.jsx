@@ -26,7 +26,7 @@ import { useLocation } from "react-router-dom";
 const ViewBoletaEnfermeria = () => {
 
 
-
+    const navigate = useNavigate();
 
     // Obtener la ubicación actual
     const location = useLocation();
@@ -42,21 +42,6 @@ const ViewBoletaEnfermeria = () => {
     const Rol = localStorage.getItem('Rol');
     const EmailPersonal = localStorage.getItem('Email');
 
-    useEffect(() => {
-
-        //validar si estas logeado y en caso de que si, validar que eres psicologo
-
-        if (UID === null) {
-            navigate("/Login");
-        }
-        console.log(Rol);
-        if (Rol !== 'Enfermería') {
-         //navegar a pagina de falta de permisos
-            navigate("/PageNotFound");
-        }
-
-
-    }, [backendUrl, CID]);
     
 
 
@@ -81,7 +66,7 @@ const ViewBoletaEnfermeria = () => {
                             Ciudad="León, Guanajuato"
                             Fecha={user.Fecha}
                             Centro={user.ID_Centro}
-                            Enfermera={EmailPersonal}
+                            Enfermera={user.Personal}
                             PresionArterial={user.PresionArterial}
                             Temperatura={user.Temperatura}
                             RitmoCardiaco={user.RitmoCardiaco}

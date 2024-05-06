@@ -21,10 +21,15 @@ const CardTallerComponent = ({
 
 }) => {
 
+  const diasRecibidos = Dias.split(',').map(Dias => (
+    <p key={Dias} id="LabelDias" className='Value-Boleta'>{Dias.trim()}</p>
+));
   //const NumExpediente = Expediente.toString();
 
-
-  /*
+//obtener fecha actual
+const date = new Date();
+const Fecha = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+const Ciudad = 'León, Gto.';
   
     const downloadPDF = () => {
       Swal.fire({
@@ -82,7 +87,7 @@ const CardTallerComponent = ({
     
   
   // Aquí generas el código QR como una imagen
-  const qrImage = await qrcode.toDataURL(ConsultaID);
+  const qrImage = await qrcode.toDataURL(TallerID);
   
   // Dibujar el código QR en el PDF
   const qrImageBytes = await fetch(qrImage).then(res => res.arrayBuffer());
@@ -100,22 +105,22 @@ const CardTallerComponent = ({
       addFormField('Ciudad:', Ciudad, pageWidth-200, pageHeight -  140, 12);
   
       //
-      addFormField('Número de expediente:', NumExpediente, 50, pageHeight -  190, 12);
+      addFormField('Número de actividad:', TallerID, 50, pageHeight -  190, 12);
       
       //reporte
-      addFormField('REPORTE DE CONSULTA', "", pageWidth/2-87, pageHeight -  260, 17);
+      addFormField('Reporte de actividad', "", pageWidth/2-87, pageHeight -  260, 17);
   
       // Información del paciente
-      addFormField('Nombre(s):', Nombre, 50, pageHeight -  330, 12);
-      addFormField('Apellido Paterno:', ApellidoM, 50, pageHeight -  380, 12);
-      addFormField('Apellido Materno:', ApellidoM, 50, pageHeight -  430, 12);
+      addFormField('Nombre del instructor:', Instructor, 50, pageHeight -  330, 12);
+
   
-      addFormField('Edad:', EdadPDF + ' años' , pageWidth-250, pageHeight -  330, 12);
-      addFormField('Número de contacto:', TelefonoPDF, pageWidth-250, pageHeight -  380, 12);
-   
+  
       //psicologa
-      addFormField('Profesional que atendió:', Psicologa, 50,pageHeight -  480 , 12);
-      addFormField('Motivo de consulta:', Psicologa, 50, pageHeight -  530, 12);
+      addFormField('Nombre de actividad:', Nombre, 50,pageHeight -  380 , 12);
+      addFormField('Horario:', Horario, 50, pageHeight -  430, 12);
+      addFormField('Días de realización:', Dias, 50, pageHeight -  480, 12);
+      addFormField('Asistentes:', Asistentes, 50, pageHeight -  530, 12);
+      addFormField('Duración:', Duracion, 50, pageHeight -  580, 12);
   
   
   // Dibujar un footer
@@ -153,10 +158,10 @@ const CardTallerComponent = ({
       // Crear un enlace de descarga y hacer clic automáticamente
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Comprobante-'+ConsultaID+'.pdf'; // Cambia el nombre del archivo según sea necesario
+      link.download = 'Comprobante-'+TallerID+'.pdf'; // Cambia el nombre del archivo según sea necesario
       link.click();
   };
-  */
+  
   const goToBack = () => {
     window.history.back();
   }
@@ -167,12 +172,12 @@ const CardTallerComponent = ({
         <img src={patron} alt="" />
       </div>
       <div className="ContainerLogoDifBoletin">
-      <img src={logo} alt="" />
+        <img src={logo} alt="" />
       </div>
       <div className="ContainerContenidoBoletin">
         <div className="containerBoletaText">
           <h3 className="tituloBoletin">{Nombre}</h3>
-        
+
           <div id="ContainerLabel" className="itemText">
             <p id="Label" className='Value-Boleta'>{Instructor}</p>
           </div>
@@ -181,24 +186,24 @@ const CardTallerComponent = ({
             <p id="LabelHorario" className='Value-Boleta'>{Horario}</p>
           </div>
           <div id="ContainerLabel" className="itemText">
-            <p id="LabelDias" className='Value-Boleta'>{Dias}</p>
+            {diasRecibidos}
           </div>
-          <div className="itemText">
+          <div id="LabelArial" className="itemText">
             <p className='SubTitle-boleta'>Cupo Total:</p>
             <p className='Value-Boleta'>{Asistentes}</p>
           </div>
-          <div className="itemText">
+          <div id="LabelArial" className="itemText">
             <p className='SubTitle-boleta'>Duración:</p>
             <p className='Value-Boleta'>{Duracion}</p>
           </div>
-          <div className="itemText">
+          <div id="LabelArial" className="itemText">
             <p className='SubTitle-boleta'>Centro:</p>
             <p className='Value-Boleta'>{Centro}</p>
           </div>
         </div>
         <div className="containerBoletaButtons">
-        <button className="btnBoleta" onClick={'#'}>Descargar PDF</button>
-        <button className="btnBoleta" onClick={'#'}>Regresar</button>
+          <button className="btnBoleta" onClick={downloadPDF}>Descargar PDF</button>
+          <button className="btnBoleta" onClick={goToBack}>Regresar</button>
         </div>
       </div>
     </div>

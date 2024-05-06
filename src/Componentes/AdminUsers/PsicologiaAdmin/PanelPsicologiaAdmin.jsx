@@ -3,11 +3,13 @@ import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import backendUrl from '../../../serverConfig';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+
 //import '../../GlobalStyles/Resources.css';
 //import './styleDash.css';
 //import './Style/AdminUser.css';
 
+import logo from '../../../GlobalStyles/images/logo.svg';
+import imagen from '../../../GlobalStyles/images/image1.png';
 
 import NewMenuApplication from '../../NuevoMenu/NuevoMenu';
 import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile} from 'react-icons/fa';
@@ -15,18 +17,11 @@ import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile} from 'react-icons/fa
 
 import HeaderApp from '../../Header/Header';
 
-import CardTallerComponent from './CardTaller/CardTallerView';
 
-const ViewTaller = () => {
-    
-     // Obtener la ubicación actual
-     const location = useLocation();
-    
-     // Obtener el objeto de usuario enviado a través de las props de estado
-     const taller = location.state;
-     console.log(taller);
 
-    const [talleres, setTalleres] = useState([]);
+const PanelPsicologiaAdministrador = () => {
+
+    const [consultas, setConsultas] = useState([]);
     const navigate = useNavigate();
     const [copiedPersonalID, setCopiedPersonalID] = useState('');
 
@@ -64,11 +59,9 @@ const ViewTaller = () => {
             html: `
              
                 
-                <p><strong>Nombre:</strong> ${user.Nombre + ' ' + user.ApellidoP + ' ' + user.ApellidoM} </p>
-                <p><strong>Edad:</strong> ${user.Edad}</p>
-                <p><strong>Presión arterial:</strong> ${user.PresionArterial}</p>
-                <p><strong>Temperatura:</strong> ${user.Temperatura} C°</p>
-                <p><strong>Ritmo Cardíaco:</strong> ${user.RitmoCardiaco} LPM</p>
+                <p><strong>Nombre:</strong> ${user.NombrePaciente + ' ' + user.ApellidoPPaciente + ' ' + user.ApellidoMPaciente} </p>
+                <p><strong>Motivo:</strong> ${user.Motivo}</p>
+                <p><strong>Fecha:</strong> ${formattedDate}</p>
                 
 
                 <style>
@@ -91,7 +84,7 @@ const ViewTaller = () => {
         const Fecha = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
         user.Fecha = Fecha;
 
-        navigate("/Enfermeria/Boleta", { state: user });
+        navigate("/Psicologia/Boleta", { state: user });
     };
 
 
@@ -110,7 +103,7 @@ const ViewTaller = () => {
 
         const fetchConsultas = async () => {
             try {
-                const response = await axios.get(`${backendUrl}/AppConnection/Talleres/`+CID, {
+                const response = await axios.get(`${backendUrl}/AppConnection/Psicologia/Consulta/Centro/`+CID, {
                     
                 }, {
                     headers: {
@@ -120,7 +113,7 @@ const ViewTaller = () => {
 
                 if (response.status === 200) {
                     console.log(response.data);
-                    setTalleres(response.data);
+                    setConsultas(response.data);
                     //console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
@@ -133,8 +126,8 @@ const ViewTaller = () => {
         fetchConsultas();
     }, [backendUrl, CID]);
 
-    function Nuevo_taller() {
-        navigate("/PanelTalleres/Create");
+    function NuevaConsulta() {
+        navigate("/Nueva-cosulta-psicologia");
     }
     function GoLogOut() {
         navigate("/LoginSU");
@@ -158,15 +151,32 @@ const ViewTaller = () => {
             confirmButtonText: 'Sí, eliminarlo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                RequestDeleteUSR(user.NumeroExpediente);
+                RequestDeleteINFO(user.NumeroExpediente);
             }
         })
     };
 
+    const RequestDeleteINFO = async (ID) => {
+        try {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Users/InformationPersonal/` + ID, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                RequestDeleteUSR(ID);
+            } else {
+                console.error('Error al eliminar el usuario');
+            }
+        } catch (error) {
+            console.error('Error al enviar la solicitud:', error.message);
+        }
+    }
 
     const RequestDeleteUSR = async (ID) => {
         try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Enfermeria/Consulta/` + ID, {
+            const response = await axios.delete(`${backendUrl}/AppConnection/Psicologia/Consulta/` + ID, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -195,8 +205,8 @@ const ViewTaller = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     // Filtrar los datos por el nombre
-    const filteredData = talleres.filter(item =>
-        item.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredData = consultas.filter(item =>
+        item.NombrePaciente.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -207,19 +217,51 @@ const ViewTaller = () => {
 
             <div className="container-Body">
                 <div className="headerInfo">
-                    <HeaderApp titulo="Boletín" />
+                    <HeaderApp titulo="Consultas" />
                 </div>
                 <div className="contenido">
-                    <CardTallerComponent
-                    Nombre={taller.Nombre}
-                    Instructor={taller.NombreInstructor + ' ' + taller.AP_Instructor }
-                    Horario={taller.Hora}
-                    Dias={taller.Dias}
-                    Asistentes={taller.Cupo + ' asistentes '}
-                    Duracion={taller.Duracion + ' minutos'}
-                    Centro={taller.NombreCentro}
-                    TallerID={taller.TallerID}
-                    />
+                    <div className="tableContainer">
+                        <div className="containerCardTable">
+                            <div className="elementsTopContainer">
+                                <h1 className='TitleTable' >Consultas registradas</h1>
+                                <input
+                                    type="text"
+                                    placeholder="Buscar por nombre"
+                                    className="inputSearch"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
+                            <div className="containerTable">
+                                <table className='tableT2'>
+                                    <thead className='theadT2'>
+                                        <tr className='trT2'>
+                                            <th className='thdT2'>Consulta</th>
+                                            <th className='thdT2'>Nombre </th>
+                                            <th className='thdT2'>Apellidos</th>
+                                            <th className='thdT2'>Fecha</th>
+                                            <th className='thdT2'>Personal</th>
+                                            <th className='thdT2'>Ver</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredData.map((consult) => (
+                                            <tr className='trT2' key={consult.NumeroExpediente}>
+                                                <td className='tdT2'>{consult.NumeroExpediente}</td>
+                                                <td className='tdT2'>{consult.NombrePaciente}</td>
+                                                <td className='tdT2'>{consult.ApellidoPPaciente + ' ' + consult.ApellidoMPaciente}</td>
+                                                <td className='tdT2'>{new Date(consult.Fecha).toLocaleDateString('es-ES')}</td>
+                                                <td className='tdT2'>{consult.Personal}</td>
+                                                <td id="ICON_Table" className='tdT2' onClick={() => goBoleta(consult)}><FaFile /></td>
+                                                
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -227,4 +269,4 @@ const ViewTaller = () => {
     );
 };
 
-export default ViewTaller;
+export default PanelPsicologiaAdministrador;

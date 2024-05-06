@@ -40,6 +40,7 @@ const ViewBoleta = () => {
     const EmailPersonal = localStorage.getItem('Email');
 
 
+
     
 
 
@@ -65,7 +66,7 @@ const ViewBoleta = () => {
                             Ciudad="León, Guanajuato"
                             Fecha={user.Fecha}
                             Centro={user.NombreCentro}
-                            Psicologa={EmailPersonal}
+                            Psicologa={user.Personal}
                             Motivo={user.Motivo}
                             ConsultaID={user.Expediente_ID}
                             Expediente = {user.NumeroExpediente}

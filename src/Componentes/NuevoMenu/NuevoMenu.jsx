@@ -52,6 +52,15 @@ const NewMenuApplication = () => {
     function GoInstructores() {
         navigate('/PanelInstructor/Asistencia');
     }
+
+    //admin
+    function GoAdminPsicologia() {
+        navigate('/PanelAdministrador/Psicologia');
+    }
+    function GoAdminEnfermeria() {
+        navigate('/PanelAdministrador/Enfermeria');
+    }
+
     
     return (
         <div className="menu">
@@ -66,10 +75,10 @@ const NewMenuApplication = () => {
                         <div className='optionBtn' onClick={GoUserAdmin}>
                             <label className='txtBTN'>Panel de administrador</label>
                         </div>
-                        <div className='optionBtn' onClick="#" >
+                        <div className='optionBtn' onClick={GoAdminPsicologia} >
                             <label className='txtBTN'>Psicología</label>
                         </div>
-                        <div className='optionBtn' onClick="#" >
+                        <div className='optionBtn' onClick={GoAdminEnfermeria} >
                             <label className='txtBTN'>Enfermería</label>
                         </div>
                         <div className='optionBtn' onClick={GoTalleres}>

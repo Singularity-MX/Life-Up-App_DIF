@@ -131,6 +131,9 @@ import CreateAsistencia from './Componentes/NewInstructores/CreateAsistencia';
 
 import ReasignarTaller from './Componentes/AdminUsers/Talleres/ReasignarTaller';
 
+import PanelPsicologiaAdministrador from './Componentes/AdminUsers/PsicologiaAdmin/PanelPsicologiaAdmin';
+import PanelEnfermeriaAdmin from './Componentes/AdminUsers/EnfermeriaAdmin/PanelEnfermeriaAdmin';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -458,6 +461,14 @@ const router = createBrowserRouter([
 {
   path: "/PanelTalleres/Reasignar",
   element: <ReasignarTaller/>,
+},
+{
+  path: "/PanelAdministrador/Psicologia",
+  element: <PanelPsicologiaAdministrador/>,
+},
+{
+  path: "/PanelAdministrador/Enfermeria",
+  element: <PanelEnfermeriaAdmin/>,
 },
 
 
