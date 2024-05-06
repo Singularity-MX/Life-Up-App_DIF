@@ -15,7 +15,7 @@ import { FaEye, FaEdit, FaTrash, FaPlus, FaArchive, FaFile} from 'react-icons/fa
 
 import HeaderApp from '../../Header/Header';
 
-
+import CardTallerComponent from './CardTaller/CardTallerView';
 
 const ViewTaller = () => {
 
@@ -203,10 +203,15 @@ const ViewTaller = () => {
                     <HeaderApp titulo="Boletín" />
                 </div>
                 <div className="contenido">
-                    <div className="tableContainer">
-                       
-                        
-                    </div>
+                    <CardTallerComponent
+                    Nombre="TALLER DE ARTE"
+                    Instructor="Luis Perez Torres"
+                    Horario="10:00 - 12:00pm"
+                    Dias="Lunes, Martes"
+                    Asistentes="10"
+                    Duracion="120"
+                    Centro="San juan de dios"
+                    />
 
                 </div>
             </div>

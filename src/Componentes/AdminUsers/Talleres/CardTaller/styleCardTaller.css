@@ -1,165 +1,110 @@
-.FormContainerBoletaConsulta{
+/*---- display */
+.ContainerBoletinTaller{
+    display: flex;
+}
+
+/*----------------------STYLE CONTAINER -------------------*/
+.ContainerBoletinTaller{
+    width: 35%;
+    height: 80%;
+    
+    max-width: 380px;
+    max-height: 700px;
+    
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+    padding: 10px;
+}
+
+
+.ContainerBoletinPatron{
+    width: 100%;
+    height: 25%;
+    background-color: red;
+}
+.ContainerBoletinPatron img{
     width: 100%;
     height: 100%;
-    padding: 1.5em;
-    border: 1px solid rgba(0, 0, 0, 0.212);
+    object-fit: cover;
+}
+.ContainerLogoDifBoletin{
+    width: 28%;
+    height: 18%;
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E9DE0;
+    border-radius: 100%;
+    border: 5px solid #ffffff;
+    box-shadow: 0px 0px 10px #0000007c;
+}
+.ContainerLogoDifBoletin img{
+    width: 55%;
+    
+    object-fit: cover;
+}
+
+.ContainerContenidoBoletin{
+    width: 90%;
+    height: 75%;
+    background-color: rgb(177, 148, 148);
+    display: flex;
+    flex-direction: column;
+}
+
+.containerBoletaText{
+    width: 100%;
+    height: 70%;
+    background-color: rgb(131, 57, 57);
+    display: flex;
+    flex-direction: column;
+}
+/*Text*/
+
+.tituloBoletin h3{
+    font-size: 10px;
+    color:#212121;
+    margin: 0;
+    
+}
+p{
+    margin: 0;
+    text-align: start;
+}
+#ContainerLabel{
+    margin: 0;
+    display: flex;
+    flex-direction:row;
+    width: auto;
+    background-color: #5a3e3e;
+    margin-bottom: 10px;
+
+}
+#Label, #LabelDias, #LabelHorario{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
     border-radius: 20px;
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.containerHeaderBoleta
-.containerInfoBoleta
-.containerMotivoBoleta
-.containerPieBoleta
-{
+#Label{
+    background-color: #5B8EAC;
+}
+#LabelHorario{
+    background-color: #1E9DE0;
+}
+#LabelDias{
+    background-color: #74C820;
+}
+
+
+.containerBoletaButtons{
     width: 100%;
-}
-
-/*----------------styles para text*/
-.SubTitle-boleta{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    color: #131313;
-    font-size: 16px;
-}
-.Value-Boleta{
-    font-family: 'Courier New', Courier, monospace;
-    color: #1b1b1b;
-    font-size: 15px;
-
- 
-}
-
-.itemText p{
-margin: 0;
-padding: 0;
-
-}
-/*//////-------------------------------CONTAINER HEADER BOLETA*/
-.containerHeaderBoleta{
-    height: 25%;
-    display: flex;
-    flex-direction: row;
-
-}
-.containerQR{
-    width: 50%;
-    height: 100%;
-
-}
-.QR_Psicologia{
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1em;
-}
-.containerFecha{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: end;
-
-}
-.itemText {
-   display: flex;
-   flex-direction: column;
-   align-items: start;
-   margin-bottom: 1em;
-
-}
-
-   /*//////-------------------------------CONTAINER encabezado BOLETA*/
-.ContainerEncabezadoInfo{
-    height: 5%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-}
-/*//////-------------------------------CONTAINER INFO BOLETA*/
-.containerInfoBoleta{
-    height: 25%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
- 
-}
-.containerLeftInfo, .containerRightInfo{
-    height: auto;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    
-    
-}
-
-/*//////-------------------------------CONTAINER MOTIVO BOLETA*/
-.containerMotivoBoleta{
     height: 30%;
-    display: flex;
-   flex-direction: column;
-
-}
-.containerPsicologaInfoBoleta{
-    display: flex;
-    flex-direction: column;
-}
-.containerMotivo{
-    width: 100%;
-    
-
-}
-.containerMotivo p{
-    text-align: justify;
-}
-
-/*//////-------------------------------CONTAINER PIE BOLETA*/
-.containerPieBoleta{
-    height: 15%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.containerPieBoleta button{
-    border: 1px solid rgba(0, 0, 0, 0.24);
-    width: 200px;
-    padding: 5px;
-    cursor: pointer;
-    color: rgb(32, 32, 32);
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    margin: 5px;
-    transition: all 0.3s;
-}
-
-
-.containerPieBoleta button:hover{
-    border: 1px solid rgba(0, 0, 0, 0.212);
-    width: 200px;
-    padding: 5px;
-    cursor: pointer;
-    color: rgb(253, 253, 253);
-    border-radius: 5px;
-    background-color: #1E9DE0;
-    margin: 5px;
-}
-
-.Footer{
-    margin-top: 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-    background-color: #1E9DE0;
-}
-.Footer img{
-    height: 20px;
+    background-color: rgb(57, 131, 127);
 }
