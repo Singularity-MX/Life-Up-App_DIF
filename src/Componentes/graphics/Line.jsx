@@ -1,41 +1,60 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
+import './line.css';
+import dato from './datos.json'
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], // Etiquetas como cadenas de texto
-  datasets: [
-    {
-      label: 'Example Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1
-    }
-  ]
+const MyLineChart = ({ data }) => {
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+
+    const ctx = chartRef.current.getContext('2d');
+
+    const labels = dato.map(item => item.fecha);
+    const biomasaData = dato.map(item => item.biomasa);
+
+    const chartData = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Biomasa',
+          data: biomasaData,
+          borderColor: '#4175F2',
+          borderWidth: 2,
+          fill: false,
+        },
+      ],
+    };
+
+    const options = {
+      scales: {
+        x: {
+          display: false, // Oculta la etiqueta del eje x
+        },
+        y: {
+          beginAtZero: true,
+        },
+      },
+    };
+
+    new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      options: options,
+    });
+  }, [dato]);
+
+  return (
+    <div className="container">
+      <div className="containerTopGraphic">
+        <p className="titleGraphic">Obtención de biomasa</p>
+      </div>
+      <div className="containerGraphicLine">
+        <canvas ref={chartRef} className="grafico" />
+      </div>
+    </div>
+  );
 };
-
-const options = {
-  scales: {
-    xAxes: [
-      {
-        type: 'category' // Especifica que el eje x debe usar una escala de tipo "category"
-      }
-    ],
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-        }
-      }
-    ]
-  }
-};
-
-const MyLineChart = () => (
-  <div>
-    <h2>Line Chart Example</h2>
-    <Line data={data} options={options} />
-  </div>
-);
 
 export default MyLineChart;
