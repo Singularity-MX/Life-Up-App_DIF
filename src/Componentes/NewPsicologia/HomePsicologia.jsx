@@ -81,23 +81,7 @@ const HomePsicologia = () => {
 
     }, [backendUrl, CID]);
 
-    const RequestDeleteINFO = async (ID) => {
-        try {
-            const response = await axios.delete(`${backendUrl}/AppConnection/Users/InformationPersonal/` + ID, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
 
-            if (response.status === 200) {
-                RequestDeleteUSR(ID);
-            } else {
-                console.error('Error al eliminar el usuario');
-            }
-        } catch (error) {
-            console.error('Error al enviar la solicitud:', error.message);
-        }
-    }
 
   
 
