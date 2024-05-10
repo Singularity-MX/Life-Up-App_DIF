@@ -1,0 +1,51 @@
+.containerGraphics{
+    width: 60%;
+    height: 90%;
+    
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    
+}
+
+.GraphicsTop{
+    width: 100%;
+    height: 45%;
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.GraphicsPsicologia{
+    width: 50%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.Grafico{
+width: 100%;
+height: 100%;
+
+}
+.GraphicsEnfermeria{
+    width: 50%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.GraphicTalleres{
+    width: 100%;
+    height: 55%;
+    padding: 10px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}

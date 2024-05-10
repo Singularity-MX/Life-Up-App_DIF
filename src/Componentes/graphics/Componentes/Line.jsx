@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './line.css';
-import data from './biomasaData.json';
+
 import LineChartComponent from './LineComponent.jsx';
 
 const ViewGraphic = () => {
@@ -8,8 +8,7 @@ const ViewGraphic = () => {
 
   return (
     <>
-      
-      <LineChartComponent data={data} />
+      <p>cd</p>
     
       
     </>

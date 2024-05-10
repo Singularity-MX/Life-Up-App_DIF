@@ -1,0 +1,38 @@
+[
+    {
+      "TallerID": "03da0ed9-d7b2-498c-8313-5ce337b7ed70",
+      "Nombre": "Taller depintura",
+      "Dias": "lUNES, MARTES",
+      "TotalAsistentes": 20
+    },
+    {
+      "TallerID": "2c927d83-7ff8-4147-9c34-b655edece476",
+      "Nombre": "Pintura",
+      "Dias": "Lunes, Martes",
+      "TotalAsistentes": 45
+    },
+    {
+      "TallerID": "7fb80917-a466-4832-9160-b7543954c8f5",
+      "Nombre": "Taller depintura",
+      "Dias": "lUNES, MARTES",
+      "TotalAsistentes": null
+    },
+    {
+      "TallerID": "b0a749b7-34f1-466b-a42e-1c4feb3fb4b4",
+      "Nombre": "Taller depintura",
+      "Dias": "lUNES, MARTES",
+      "TotalAsistentes": null
+    },
+    {
+      "TallerID": "dad1ced6-3ec8-4101-be27-858c86ecd34e",
+      "Nombre": "Arte Microbiológico",
+      "Dias": "Lunes, Miércoles",
+      "TotalAsistentes": 20
+    },
+    {
+      "TallerID": "eba75688-d568-4de7-86a6-6e70147d56a9",
+      "Nombre": "Taller depintura",
+      "Dias": "lUNES, MARTES",
+      "TotalAsistentes": null
+    }
+  ]

@@ -134,7 +134,11 @@ import ReasignarTaller from './Componentes/AdminUsers/Talleres/ReasignarTaller';
 import PanelPsicologiaAdministrador from './Componentes/AdminUsers/PsicologiaAdmin/PanelPsicologiaAdmin';
 import PanelEnfermeriaAdmin from './Componentes/AdminUsers/EnfermeriaAdmin/PanelEnfermeriaAdmin';
 
-import ViewGraphic from './Componentes/graphics/Line';
+import ViewGraphic from './Componentes/graphics/Componentes/Line';
+
+import HomeEstadistica from './Componentes/graphics/ViewEstadistica';
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -475,6 +479,11 @@ const router = createBrowserRouter([
 {
   path: "/line",
   element: <ViewGraphic/>,
+},
+
+{
+  path: "/Home/Admnistrador/Resumen",
+  element: <HomeEstadistica/>,
 },
 
 ]);

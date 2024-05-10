@@ -160,7 +160,7 @@ function InicioSesion() {
 
         //Validar si es enfermeria
         if (responseData.Rol == 'Administrador') {
-          navigate('/MenuApp');
+          console.log(responseData)
           // Hacer una solicitud GET al backend
           /*const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
           const DataResumen = response.data;
@@ -169,6 +169,29 @@ function InicioSesion() {
              navigate('/Home/Enferemeria' , { state: DataResumen });
            }
         */
+
+          const response = await axios.get(`${backendUrl}/AppConnection/Estadisticas/ConsultasPorDia/${responseData.ID_Centro}`);
+          const resumenPsicologia = response.data;
+          console.log(resumenPsicologia);
+          if (response.status === 200) {
+
+            //obtener las estadisticas de enfermeria
+            const response2 = await axios.get(`${backendUrl}/AppConnection/Estadisticas/ConsultasEnfermeriaPorDia/${responseData.ID_Centro}`);
+            const resumenEnfermeria = response2.data;
+            console.log(resumenEnfermeria);
+            if (response2.status === 200) {
+              
+              //obtener las asistencias a talleres
+              //obtener las estadisticas de enfermeria
+            const response3 = await axios.get(`${backendUrl}/AppConnection/Estadisticas/TalleresYAsistentes/${responseData.ID_Centro}`);
+            const resumenTalleres = response3.data;
+            console.log(resumenTalleres);
+            if (response3.status === 200) {
+              navigate('/Home/Admnistrador/Resumen', { psicologia: resumenPsicologia, enfermeria: resumenEnfermeria, talleres: resumenTalleres });
+              }
+            }
+          }
+
         }
 
         /*

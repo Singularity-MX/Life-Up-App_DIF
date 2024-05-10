@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import './line.css';
 
-const LineChartComponent = ({ data }) => {
+import './bar.css'
+
+const BarChartComponent = ({ data }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null); // Referencia al objeto de gráfico
 
@@ -11,27 +12,23 @@ const LineChartComponent = ({ data }) => {
 
     const ctx = chartRef.current.getContext('2d');
 
-    const labels = data.map(item => item.fecha);
-    const biomasaData = data.map(item => item.biomasa);
+    const labels = data.map(item => item.Nombre);
+    const asistentesData = data.map(item => item.TotalAsistentes || 0); // Manejar valores nulos
 
     const chartData = {
       labels: labels,
       datasets: [
         {
-          label: 'Biomasa',
-          data: biomasaData,
-          borderColor: '#4175F2',
-          borderWidth: 2,
-          fill: false,
+          label: 'Total de Asistentes',
+          data: asistentesData,
+          backgroundColor: '#FF5733', // Color de las barras
+          borderWidth: 1,
         },
       ],
     };
 
     const options = {
       scales: {
-        x: {
-          display: false, // Oculta la etiqueta del eje x
-        },
         y: {
           beginAtZero: true,
         },
@@ -43,9 +40,9 @@ const LineChartComponent = ({ data }) => {
       chartInstance.current.destroy();
     }
 
-    // Crear el nuevo gráfico
+    // Crear el nuevo gráfico de barras
     chartInstance.current = new Chart(ctx, {
-      type: 'line',
+      type: 'bar', // Tipo de gráfico de barras
       data: chartData,
       options: options,
     });
@@ -59,13 +56,11 @@ const LineChartComponent = ({ data }) => {
   }, [data]);
 
   return (
-    
-     
-      <div className="containerGraphicLine">
-        <canvas ref={chartRef} className="grafico" />
-      </div>
-    
+    <div className="containerGraphicLine">
+      <p>Asistencia a talleres</p>
+      <canvas ref={chartRef} className="grafico" />
+    </div>
   );
 };
 
-export default LineChartComponent;
+export default BarChartComponent;
