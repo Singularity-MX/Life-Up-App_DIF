@@ -134,7 +134,7 @@ import ReasignarTaller from './Componentes/AdminUsers/Talleres/ReasignarTaller';
 import PanelPsicologiaAdministrador from './Componentes/AdminUsers/PsicologiaAdmin/PanelPsicologiaAdmin';
 import PanelEnfermeriaAdmin from './Componentes/AdminUsers/EnfermeriaAdmin/PanelEnfermeriaAdmin';
 
-import MyLineChart from './Componentes/graphics/Line';
+import ViewGraphic from './Componentes/graphics/Line';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -474,7 +474,7 @@ const router = createBrowserRouter([
 
 {
   path: "/line",
-  element: <MyLineChart/>,
+  element: <ViewGraphic/>,
 },
 
 ]);

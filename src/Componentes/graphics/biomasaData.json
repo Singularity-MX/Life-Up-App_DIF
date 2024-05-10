@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "cultivo": "Cultivo 1",
+        "fecha": "2022-01-01",
+        "biomasa": 1000
+    },
+    {
+        "id": 2,
+        "cultivo": "Cultivo 2",
+        "fecha": "2022-01-02",
+        "biomasa": 800
+    },
+    {
+        "id": 3,
+        "cultivo": "Cultivo 3",
+        "fecha": "2022-01-03",
+        "biomasa": 600
+    },
+    {
+        "id": 4,
+        "cultivo": "Cultivo 4",
+        "fecha": "2022-01-04",
+        "biomasa": 1200
+    },
+    {
+        "id": 5,
+        "cultivo": "Cultivo 5",
+        "fecha": "2022-01-05",
+        "biomasa": 1500
+    }
+]
