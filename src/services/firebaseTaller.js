@@ -52,7 +52,7 @@ function removeFirebase(id) {
   registroRef.remove()
     .then(() => showAlertNewConsult('Eliminación exitosa', 'Se completó eliminó el taller exitosamente.', 'success'))
 
-    .catch((error) => //console.log('Error al eliminar registro:', error));
+    .catch((error) => console.log('Error al eliminar registro:', error));
 }
 
 
