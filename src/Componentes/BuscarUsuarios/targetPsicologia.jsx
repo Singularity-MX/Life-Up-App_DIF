@@ -74,13 +74,13 @@ function TargetPsico({ id }) {
             firebase.ref('/Psicologia/Consultas/' + myID + '/' + UC + '/Motivo').once('value').then((snapshot) => {
                 const ID = snapshot.val();
                 setMotivo(snapshot.val());
-                console.log(UC); 
+                //console.log(UC); 
             });
 
             firebase.ref('/Psicologia/Consultas/' + myID + '/' + UC + '/Objetivos').once('value').then((snapshot) => {
                 const ID = snapshot.val();
                 setObjetivos(snapshot.val());
-                console.log(); 
+                //console.log(); 
             });
             //Obtener el ultima
             firebase.ref('/Psicologia/Consultas/' + myID + '/' + UC + '/Recomendaciones').once('value').then((snapshot) => {

@@ -147,7 +147,7 @@ const Form_user_photo = () => {
   const uploadFile = () => {
   // Verificar si hay una imagen seleccionada
   if (!imageUpload) {
-    console.log("No se ha seleccionado ninguna imagen.");
+    //console.log("No se ha seleccionado ninguna imagen.");
     return;
   }
 

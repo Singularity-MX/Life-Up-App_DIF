@@ -188,7 +188,7 @@ const EditSuperUsuario = () => {
         axios.post(backendUrl + '/api/AddUser', formData)
             .then(response => {
                 // Manejar la respuesta del servidor si es necesario
-                console.log(response.data);
+                //console.log(response.data);
                 if (response.status === 200) {
                     // Autenticación exitosa, puedes redirigir al usuario a otra página
                     //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
@@ -213,7 +213,7 @@ const EditSuperUsuario = () => {
         axios.post(backendUrl + '/api/IncrementUSerNum', Data)
             .then(response => {
                 // Manejar la respuesta del servidor si es necesario
-                console.log(response.data);
+                //console.log(response.data);
                 if (response.status === 200) {
                     // Autenticación exitosa, puedes redirigir al usuario a otra página
                     //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');
@@ -362,7 +362,7 @@ function DeleteUser(id) {
     axios.post(backendUrl + '/api/DeleteUser', requestData)
       .then(response => {
         // Manejar la respuesta del servidor si es necesario
-        console.log(response.data);
+        //console.log(response.data);
         if (response.status === 200) {
           //AlertaTimer('success', 'Completado', 'Se ha eliminado correctamente', 1500);
         } else {
@@ -401,7 +401,7 @@ const handleUpdate = () => {
      axios.post(backendUrl + '/api/AddUser', formData)
      .then(response => {
          // Manejar la respuesta del servidor si es necesario
-         console.log(response.data);
+         //console.log(response.data);
          if (response.status === 200) {
              // Autenticación exitosa, puedes redirigir al usuario a otra página
              //Alerta(icono, titulo, texto) ('Inicio de sesión exitoso');

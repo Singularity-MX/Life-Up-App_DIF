@@ -29,15 +29,32 @@ import LineChartComponent from './Componentes/LineComponent.jsx';
 import BarChartComponent from './Componentes/BarGraphic.jsx';
 
 import dataTalleres from './talleres.json'
+import { format } from 'date-fns';
 
 const HomeEstadistica = () => {
     const location = useLocation();
-    const { psicologia } = location;
-    const { enfermeria } = location;
-    const { talleres } = location;
+    const { state } = location;
+    const resumenPsicologia = state.resumenPsicologia;
+    const resumenEnfermeria = state.resumenEnfermeria;
+    const resumenTalleres = state.resumenTalleres;
+
+    // Formatear las fechas en los objetos resumenPsicologia y resumenEnfermeria
+const formattedResumenPsicologia = resumenPsicologia.map(item => ({
+    Fecha: format(new Date(item.Fecha), 'dd/MM/yyyy'), // Formatear la fecha en formato dd/MM/yyyy
+    NumConsultas: item.NumConsultas
+  }));
+  
+  const formattedResumenEnfermeria = resumenEnfermeria.map(item => ({
+    Fecha: format(new Date(item.Fecha), 'dd/MM/yyyy'), // Formatear la fecha en formato dd/MM/yyyy
+    NumConsultas: item.NumConsultas
+  }));
+
+    //console.log(formattedResumenPsicologia);
+    //console.log(formattedResumenEnfermeria);
+    //console.log(state.resumenTalleres);
 
 
-console.log(psicologia)
+
     const [isVisible, setIsVisible] = useState(false);
 
     const zoomWithDelay = useSpring({
@@ -66,7 +83,7 @@ console.log(psicologia)
     /*
     const location = useLocation();
     const { psicologia } = location;
-    console.log(state[0].NombreCompleto);
+    //console.log(state[0].NombreCompleto);
     */
     const navigate = useNavigate();
 
@@ -88,7 +105,7 @@ console.log(psicologia)
         if (UID === null) {
             navigate("/Login");
         }
-        console.log(Rol);
+        //console.log(Rol);
         if (Rol !== 'Administrador') {
             //navegar a pagina de falta de permisos
             navigate("/PageNotFound");
@@ -118,14 +135,14 @@ console.log(psicologia)
                     <div className="containerGraphics">
                         <div className="GraphicsTop">
                             <div className="GraphicsPsicologia">
-                            <LineChartComponent className='Grafico' data={data} titulo="Consultas de psicología" />
+                            <LineChartComponent className='Grafico' data={formattedResumenPsicologia} titulo="Consultas de psicología" />
                             </div>
                             <div className="GraphicsEnfermeria">
-                            <LineChartComponent className='Grafico' data={data} titulo="Consultas de enfermería"/>
+                            <LineChartComponent className='Grafico' data={formattedResumenEnfermeria} titulo="Consultas de enfermería"/>
                             </div>
                         </div>
                         <div className="GraphicTalleres">
-                        <BarChartComponent className='Grafico' data={dataTalleres} />
+                        <BarChartComponent className='Grafico' data={resumenTalleres} />
                         </div>
                     </div>
                 </div>

@@ -120,14 +120,14 @@ function InicioSesion() {
         localStorage.setItem('CID', responseData.ID_Centro);
         localStorage.setItem('Rol', responseData.Rol);
 
-        console.log(responseData.Rol);
+        //console.log(responseData.Rol);
 
         //Valir si es psicologa
         if (responseData.Rol == 'Psicología') {
           // Hacer una solicitud GET al backend
           const response = await axios.get(`${backendUrl}/AppConnection/Psicologia/Resmen/${responseData.UserID}`);
           const DataResumen = response.data;
-          console.log(DataResumen);
+          //console.log(DataResumen);
 
           if (response.status === 200) {
             navigate('/Home/Psicologia', { state: DataResumen });
@@ -139,7 +139,7 @@ function InicioSesion() {
           // Hacer una solicitud GET al backend
           const response = await axios.get(`${backendUrl}/AppConnection/Talleres/Resumen/${responseData.UserID}`);
           const DataResumen = response.data;
-          console.log(DataResumen);
+          //console.log(DataResumen);
           if (response.status === 200) {
             navigate('/PanelInstructor/Home', { state: DataResumen });
           }
@@ -151,7 +151,7 @@ function InicioSesion() {
           // Hacer una solicitud GET al backend
           const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
           const DataResumen = response.data;
-          console.log(DataResumen);
+          //console.log(DataResumen);
           if (response.status === 200) {
             navigate('/Home/Enferemeria', { state: DataResumen });
           }
@@ -160,11 +160,11 @@ function InicioSesion() {
 
         //Validar si es enfermeria
         if (responseData.Rol == 'Administrador') {
-          console.log(responseData)
+          //console.log(responseData)
           // Hacer una solicitud GET al backend
           /*const response = await axios.get(`${backendUrl}/AppConnection/Enfermeria/Resumen/${responseData.UserID}`);
           const DataResumen = response.data;
-          console.log(DataResumen);
+          //console.log(DataResumen);
            if (response.status === 200) {
              navigate('/Home/Enferemeria' , { state: DataResumen });
            }
@@ -172,64 +172,31 @@ function InicioSesion() {
 
           const response = await axios.get(`${backendUrl}/AppConnection/Estadisticas/ConsultasPorDia/${responseData.ID_Centro}`);
           const resumenPsicologia = response.data;
-          console.log(resumenPsicologia);
+          //console.log(resumenPsicologia);
           if (response.status === 200) {
 
             //obtener las estadisticas de enfermeria
             const response2 = await axios.get(`${backendUrl}/AppConnection/Estadisticas/ConsultasEnfermeriaPorDia/${responseData.ID_Centro}`);
             const resumenEnfermeria = response2.data;
-            console.log(resumenEnfermeria);
+            //console.log(resumenEnfermeria);
             if (response2.status === 200) {
               
               //obtener las asistencias a talleres
               //obtener las estadisticas de enfermeria
             const response3 = await axios.get(`${backendUrl}/AppConnection/Estadisticas/TalleresYAsistentes/${responseData.ID_Centro}`);
             const resumenTalleres = response3.data;
-            console.log(resumenTalleres);
+            //console.log(resumenTalleres);
             if (response3.status === 200) {
-              navigate('/Home/Admnistrador/Resumen', { psicologia: resumenPsicologia, enfermeria: resumenEnfermeria, talleres: resumenTalleres });
+              const resumen = {resumenPsicologia, resumenEnfermeria, resumenTalleres};
+              //navigate('/Home/Admnistrador/Resumen', { state: resumenTalleres });
+              navigate('/Home/Admnistrador/Resumen', { state: resumen});
+
               }
             }
           }
 
         }
 
-        /*
-        else{
-        navigate('/MenuApp');
-        }
-        */
-
-
-        // Manejar la lógica basada en roles
-        /*  
-          if (role === 'Administración') {
-            // Redirigir a la página de administración
-            
-            alert('admin ID: '+ id_personal);
-          } else if (role === 'Psicología') {
-            alert('psico');
-            // Redirigir a la página de psicología
-            navigate('/MenuPsico');
-          } else if (role === 'Recepción') {
-            alert('recep');
-            // Redirigir a la página de recepción
-            // navigate('/reception');
-          } else if (role === 'Enfermería') {
-            alert('enfer');
-            // Redirigir a la página de salud
-            // navigate('/health');
-          } else if (role === 'Instructor') {
-            alert('inatructor');
-            // Redirigir a la página de salud
-            // navigate('/health');
-              
-          } else {
-            // Manejar un rol desconocido
-            // setError('Unknown role');
-          }
-  
-          */
       } else {
         if (response.status === 401) {
           errorPassword();
@@ -266,7 +233,7 @@ function InicioSesion() {
 
       <animated.div style={slide} id="contenedor_form">
         <div id='contenedor_Menu_top'>
-          <div id='Option' onClick={handleUserAdmin}><p>Administrador</p></div>
+          
         </div>
         <img src={LogoLogin} id='IconoLoginForm' preload="true" />
 

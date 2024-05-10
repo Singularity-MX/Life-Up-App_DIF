@@ -71,7 +71,7 @@ const handleCheckboxChange = (e) => {
     if (UID === null) {
       navigate("/Login");
     }
-    console.log(Rol);
+    //console.log(Rol);
     if (Rol !== 'Administrador') {
       //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
@@ -99,7 +99,7 @@ const handleCheckboxChange = (e) => {
       const JSON_Taller = {
         UserID: Instructor
       };
-      console.log(JSON_Taller);
+      //console.log(JSON_Taller);
       
       const response = await axios.put(backendUrl + '/AppConnection/Talleres/Instructores/' +taller.TallerID, JSON_Taller);
       if (response.status === 200) {

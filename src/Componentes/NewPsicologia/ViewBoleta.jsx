@@ -31,7 +31,7 @@ const ViewBoleta = () => {
     // Obtener el objeto de usuario enviado a través de las props de estado
     const user = location.state;
 
-    console.log(user);
+    //console.log(user);
 
 
     const UID = localStorage.getItem('UID');

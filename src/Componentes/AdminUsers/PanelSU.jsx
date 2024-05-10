@@ -83,7 +83,7 @@ const PanelAdmin = () => {
 
                 if (response.status === 200) {
                     setUsers(response.data);
-                    //console.log(response.data);
+                    ////console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
                 }

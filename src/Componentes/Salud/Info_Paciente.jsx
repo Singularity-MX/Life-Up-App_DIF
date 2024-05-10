@@ -140,7 +140,7 @@ function InfoPaciente({ id }) {
             firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Motivo').once('value').then((snapshot) => {
                 const ID = snapshot.val();
                 setMotivo(snapshot.val());
-                console.log();
+                //console.log();
             });
             //Obtener el ultima
             firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/ConsultaInfo/Hora').once('value').then((snapshot) => {
@@ -171,7 +171,7 @@ function InfoPaciente({ id }) {
             firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/Medicamentos').once('value').then((snapshot) => {
                 const ID = snapshot.val();
                 setMedi(snapshot.val());
-                console.log(snapshot.val());
+                //console.log(snapshot.val());
             });
             firebase.ref('/Salud/Consultas/' + myID + '/' + UC + '/SignosVitales/O2Sat').once('value').then((snapshot) => {
                 const ID = snapshot.val();

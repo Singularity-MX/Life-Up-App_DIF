@@ -27,7 +27,7 @@ const Formulario_Personal = () => {
 
   // Convertir la cadena JSON de vuelta a un objeto JavaScript (userData)
   const JsonUser = JSON.parse(storedUserDataString);
-  console.log(JsonUser);
+  //console.log(JsonUser);
 
 
 

@@ -170,7 +170,7 @@ const RespaldoForm = () => {
       }
       const response = await axios.post(backendUrl + '/AppConnection/Users', Data);
       const Respuesta = response.data;
-      console.log(Respuesta.UserID);
+      //console.log(Respuesta.UserID);
       // Do something with the response
     } catch (error) {
       // Handle error

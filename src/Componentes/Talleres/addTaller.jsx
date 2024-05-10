@@ -52,7 +52,7 @@ const AddTaller = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const stringConcatenado = diasSeleccionados.join(", ");
-        console.log(stringConcatenado);
+        //console.log(stringConcatenado);
         AddTallerFirebase(nombre, duracion, lugar, instructor, stringConcatenado, hora);
 
         navigate("/dashboardTaller");

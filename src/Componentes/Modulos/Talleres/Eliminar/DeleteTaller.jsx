@@ -86,7 +86,7 @@ const ModuleTallerDelete= () => {
         .catch(error => {
           // Manejar errores si ocurre alguno
           if (error.response) {
-            console.log('Código de estado de error:', error.response.status); // Muestra el código de estado de error en la consola
+            //console.log('Código de estado de error:', error.response.status); // Muestra el código de estado de error en la consola
             console.error('Error:', error);
             // Aquí también podrías mostrar un mensaje al usuario indicando que ocurrió un error.
           }
@@ -105,7 +105,7 @@ const ModuleTallerDelete= () => {
       .catch(error => {
         // Manejar errores si ocurre alguno
         if (error.response) {
-          console.log('Código de estado de error:', error.response.status); // Muestra el código de estado de error en la consola
+          //console.log('Código de estado de error:', error.response.status); // Muestra el código de estado de error en la consola
           console.error('Error:', error);
           // Aquí también podrías mostrar un mensaje al usuario indicando que ocurrió un error.
         }
@@ -125,7 +125,7 @@ const ModuleTallerDelete= () => {
     axios.post(backendUrl + '/api/DeleteUserInfoComplete', requestData)
       .then(response => {
         // Manejar la respuesta del servidor si es necesario
-        console.log(response.data);
+        //console.log(response.data);
         if (response.status === 200) {
           AlertaTimer('success', 'Completado', 'Se ha eliminado correctamente', 1500);
 

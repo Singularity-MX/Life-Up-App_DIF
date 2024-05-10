@@ -51,7 +51,7 @@ const HomeInstructor = () => {
     //obetenr lo que envie en el navigate con state
     const location = useLocation();
     const { state } = location;
-    console.log(state.NombreCompleto);
+    //console.log(state.NombreCompleto);
     const navigate = useNavigate();
 
 
@@ -72,7 +72,7 @@ const HomeInstructor = () => {
         if (UID === null) {
             navigate("/Login");
         }
-        console.log(Rol);
+        //console.log(Rol);
         if (Rol !== 'Instructor') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");

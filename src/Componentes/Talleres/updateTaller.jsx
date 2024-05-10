@@ -111,7 +111,7 @@ const ActualizarTaller = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const stringConcatenado = diasSeleccionados.join(", ");
-        console.log(stringConcatenado);
+        //console.log(stringConcatenado);
         
         if(verificaCheckbox==true){
             
@@ -157,7 +157,7 @@ const ActualizarTaller = () => {
     }
     function handleDias(event) {
         setNuevo(event.target.value);
-        console.log(NuevoDias);
+        //console.log(NuevoDias);
     }
 
 

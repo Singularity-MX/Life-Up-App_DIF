@@ -51,7 +51,7 @@ const HomePsicologia = () => {
     //obetenr lo que envie en el navigate con state
     const location = useLocation();
     const { state } = location;
-    console.log(state[0].NombreCompleto);
+    //console.log(state[0].NombreCompleto);
     const navigate = useNavigate();
 
 
@@ -72,7 +72,7 @@ const HomePsicologia = () => {
         if (UID === null) {
             navigate("/Login");
         }
-        console.log(Rol);
+        //console.log(Rol);
         if (Rol !== 'Psicología') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");

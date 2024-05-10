@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import './line.css';
 
-const LineChartComponent = ({ data, titulo}) => {
+const LineChartComponent = ({ data, titulo }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null); // Referencia al objeto de gráfico
 
@@ -11,15 +11,15 @@ const LineChartComponent = ({ data, titulo}) => {
 
     const ctx = chartRef.current.getContext('2d');
 
-    const labels = data.map(item => item.fecha);
-    const biomasaData = data.map(item => item.biomasa);
+    const labels = data.map(item => item.Fecha); // Cambiar 'fecha' por 'Fecha'
+    const consultasData = data.map(item => item.NumConsultas); // Cambiar 'biomasa' por 'NumConsultas'
 
     const chartData = {
       labels: labels,
       datasets: [
         {
-          label: 'Biomasa',
-          data: biomasaData,
+          label: 'Consultas',
+          data: consultasData,
           borderColor: '#4175F2',
           borderWidth: 2,
           fill: false,
@@ -30,10 +30,18 @@ const LineChartComponent = ({ data, titulo}) => {
     const options = {
       scales: {
         x: {
-          display: false, // Oculta la etiqueta del eje x
+          display: true,
+          title: {
+            display: true,
+            text: 'Fecha', // Agregar título para el eje x
+          },
         },
         y: {
           beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Número de consultas', // Agregar título para el eje y
+          },
         },
       },
     };
@@ -59,13 +67,10 @@ const LineChartComponent = ({ data, titulo}) => {
   }, [data]);
 
   return (
-    
-     
-      <div className="containerGraphicLine">
-        <p>{titulo}</p>
-        <canvas ref={chartRef} className="grafico" />
-      </div>
-    
+    <div className="containerGraphicLine">
+      <p>{titulo}</p>
+      <canvas ref={chartRef} className="grafico" />
+    </div>
   );
 };
 

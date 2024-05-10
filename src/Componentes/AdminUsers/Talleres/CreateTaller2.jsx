@@ -71,7 +71,7 @@ const handleCheckboxChange = (e) => {
     if (UID === null) {
       navigate("/Login");
     }
-    console.log(Rol);
+    //console.log(Rol);
     if (Rol !== 'Administrador') {
       //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
@@ -107,7 +107,7 @@ const handleCheckboxChange = (e) => {
         Hora: JSON.Hora,
         Cupo: JSON.Cupo
       };
-      console.log(JSON_Taller);
+      //console.log(JSON_Taller);
       
       const response = await axios.post(backendUrl + '/AppConnection/Talleres', JSON_Taller);
       if (response.status === 200) {

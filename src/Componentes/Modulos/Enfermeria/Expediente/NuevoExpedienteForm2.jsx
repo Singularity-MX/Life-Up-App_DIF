@@ -73,13 +73,13 @@ const ModuleSaludNewExpedienteCreate = () => {
   function handleCheckboxChange(event) {
     setSelectDesactivado(event.target.checked);
     setPadecimientos("NINGUNO");
-    console.log(padecimientos);
+    //console.log(padecimientos);
   }
 
   function handleCheckboxChangeAlergias(event) {
     setSelectDesactivadoAlergias(event.target.checked);
     setAlergias("NINGUNO");
-    console.log(alergias);
+    //console.log(alergias);
   }
 
 

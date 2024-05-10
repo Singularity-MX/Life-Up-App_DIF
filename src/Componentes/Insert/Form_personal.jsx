@@ -31,7 +31,7 @@ const Form_personal = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addUserNew(nombre, ap, am, edad, sexo, tel); /*Función importada de Services:  firebasAddUser.js*/
-    console.log(ap);
+    //console.log(ap);
     navigate("/addUserContacto");
   }
 
@@ -52,7 +52,7 @@ const Form_personal = () => {
     }
     let session = getSession();
     setEmail(session.email);
-    console.log("Your access token is: " + session.accessToken);
+    //console.log("Your access token is: " + session.accessToken);
   }, [navigate]);
 
   const Home = () => {

@@ -97,7 +97,7 @@ const PanelEnfermeriaAdmin = () => {
         if (UID === null) {
             navigate("/Login");
         }
-        console.log(Rol);
+        //console.log(Rol);
         if (Rol !== 'Administrador') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");
@@ -114,9 +114,9 @@ const PanelEnfermeriaAdmin = () => {
                 });
 
                 if (response.status === 200) {
-                    console.log(response.data);
-                    setConsultas(response.data);
                     //console.log(response.data);
+                    setConsultas(response.data);
+                    ////console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
                 }

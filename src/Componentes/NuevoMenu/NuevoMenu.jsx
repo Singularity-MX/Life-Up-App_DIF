@@ -14,7 +14,7 @@ const NewMenuApplication = () => {
 
     //obtener el rol del local storage
     const rol = localStorage.getItem('Rol');
-    //console.log(rol);
+    ////console.log(rol);
 
     //usuarios
     function GoUser() {

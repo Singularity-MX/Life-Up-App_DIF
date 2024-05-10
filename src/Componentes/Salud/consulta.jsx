@@ -68,7 +68,7 @@ const Form_consulta = () => {
 
   const handlePresion = (event) => {
     const nuevaPresion = event.target.value.replace('/', '-');
-    console.log(nuevaPresion);
+    //console.log(nuevaPresion);
     setPresion(event.target.value);
   }
   const handleFr = (event) => {

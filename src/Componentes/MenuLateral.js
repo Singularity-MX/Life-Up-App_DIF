@@ -35,7 +35,7 @@ export function Menu(props) {
       let session = getSession();
       setEmail(session.email);
   
-      console.log("Your access token is: " + session.accessToken);
+      //console.log("Your access token is: " + session.accessToken);
     }, [navigate]);
   
     const onLogout = () => {

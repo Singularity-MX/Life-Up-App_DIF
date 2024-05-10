@@ -39,7 +39,7 @@ const CreateTaller1 = () => {
     if (UID === null) {
       navigate("/Login");
   }
-  console.log(Rol);
+  //console.log(Rol);
   if (Rol !== 'Administrador') {
    //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
@@ -68,7 +68,7 @@ const CreateTaller1 = () => {
       Hora: HoraDefinida
 
     };
-    //console.log(JSON);
+    ////console.log(JSON);
     navigate('/PanelTalleres/Create/Asignacion', { state: JSON });
     
   };
@@ -121,7 +121,7 @@ const handleEdadChange = (e) => {
   } else {
     // Si no es válido, muestra un mensaje de error o realiza alguna acción adicional
     // Por ejemplo, podrías mostrar un mensaje al usuario indicando que la entrada debe ser un número
-    console.log('La edad debe ser un valor numérico mayor que cero');
+    //console.log('La edad debe ser un valor numérico mayor que cero');
   }
 };
 

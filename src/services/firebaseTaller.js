@@ -23,9 +23,9 @@ function AddTallerFirebase(nombre, duracion, lugar, instructor, dias, hora) {
     const month = new Date().getMonth().toString();
     const day = new Date().getDate().toString();
     let newID = "";
-    console.log(day);
+    //console.log(day);
     newID = day + "1" + "117" + year + ID;
-    console.log(newID);
+    //console.log(newID);
     const bucket = "Actividades/Talleres"; //nodo inicial
     firebase.ref(bucket + '/Registrados' + '/' + newID + '/Nombre').set(nombre); //Add Nombre
     firebase.ref(bucket + '/Registrados' + '/' + newID + '/Duracion').set(duracion); //Add Nombre
@@ -52,7 +52,7 @@ function removeFirebase(id) {
   registroRef.remove()
     .then(() => showAlertNewConsult('Eliminación exitosa', 'Se completó eliminó el taller exitosamente.', 'success'))
 
-    .catch((error) => console.log('Error al eliminar registro:', error));
+    .catch((error) => //console.log('Error al eliminar registro:', error));
 }
 
 
@@ -79,7 +79,7 @@ function deleteTallerFirebase(id) {
       const eliminarRegistro = () => {
         // Aquí puedes incluir la lógica para eliminar el registro
         firebase.ref('/Actividades/Talleres/Registrados/' + id).remove();
-        console.log('Registro eliminado');
+        //console.log('Registro eliminado');
         showAlertNewConsult('Eliminación exitosa', 'Se completó eliminó el taller exitosamente.', 'success');
         setTimeout(() => {
           window.location.reload();
@@ -217,7 +217,7 @@ function Asistencia(newID, idTaller) {
 
 
     }
-    console.log(dayOfWeek);
+    //console.log(dayOfWeek);
 
 
     showAlertNewConsult('Actualización exitosa', 'Se completó el registro del taller exitosamente.', 'success');

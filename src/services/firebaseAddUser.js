@@ -33,13 +33,13 @@ function addUserNew(Nombre, AP, AM, Edad, Sexo, Tel){
     firebase.ref('/Config/UserNum').once('value').then((snapshot) => {
         const valor = snapshot.val();
         UserID = year + month + day + (valor+1);
-        console.log(UserID);
+        //console.log(UserID);
         firebase.ref('/Config/UserNum').set(parseInt(valor+1));
         //se actualiza del contador
 
         //Se hace el registro set
         addPersonalInfo(UserID, Nombre, AP, AM, Edad, Sexo, Tel);
-        console.log(Nombre);
+        //console.log(Nombre);
       });
 }
 
@@ -49,7 +49,7 @@ function addContacto(calle, col, cp, ciudad, estado){
     firebase.ref('/Config/UserNum').once('value').then((snapshot) => {
         const valor = snapshot.val();
         const ID = construccionID()+valor;
-        console.log(ID);
+        //console.log(ID);
         //Se hace el registro set
         addContactoInfo(ID, calle, col, cp, ciudad, estado);
       });
@@ -61,7 +61,7 @@ function addEmergencia(Nombre, AP, AM, Tel, Parentesco){
     firebase.ref('/Config/UserNum').once('value').then((snapshot) => {
         const valor = snapshot.val();
         const ID = construccionID()+valor;
-        console.log(ID);
+        //console.log(ID);
         //Se hace el registro set
         addEmergenciaInfo(ID, Nombre, AP, AM, Tel, Parentesco);
       });
@@ -134,7 +134,7 @@ function addReferenciaImagen(Url) {
     firebase.ref('/UltimosUsuarios/UserAdd').once('value').then((snapshot) => {
         const valor = snapshot.val();
         const ID = construccionID()+valor;
-        console.log(ID);
+        //console.log(ID);
         //Se hace el registro set
         const bucket = "/ImagesReferences"; //nodo inicial
         firebase.ref(bucket+'/'+valor).set(Url); //Add calle

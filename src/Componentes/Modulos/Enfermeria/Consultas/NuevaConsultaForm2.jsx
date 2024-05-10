@@ -85,13 +85,13 @@ const ModuleSaludNewConsultaForm = () => {
   function handleCheckboxChange(event) {
     setSelectDesactivado(event.target.checked);
     setPadecimientos("NINGUNO");
-    console.log(padecimientos);
+    //console.log(padecimientos);
   }
 
   function handleCheckboxChangeAlergias(event) {
     setSelectDesactivadoAlergias(event.target.checked);
     setAlergias("NINGUNO");
-    console.log(alergias);
+    //console.log(alergias);
   }
 
 
@@ -272,7 +272,7 @@ const Medicacion = medic;
   
     const handlePresion = (event) => {
       const nuevaPresion = event.target.value.replace('/', '-');
-      console.log(nuevaPresion);
+      //console.log(nuevaPresion);
       setPresion(event.target.value);
     }
     const handleFr = (event) => {

@@ -57,7 +57,7 @@ const CreateAsistencia = () => {
     if (UID === null) {
       navigate("/Login");
     }
-    console.log(Rol);
+    //console.log(Rol);
     if (Rol !== 'Instructor') {
       //navegar a pagina de falta de permisos
       navigate("/PageNotFound");
@@ -69,7 +69,7 @@ const CreateAsistencia = () => {
   const fetchTalleres = async () => {
     try {
       const response = await axios.get(backendUrl + '/AppConnection/Talleres/Usuario/' + UID);
-      console.log(response.data);
+      //console.log(response.data);
       setTalleresLista(response.data); // Guardar las delegaciones en el estado
     } catch (error) {
       console.error('Error fetching delegaciones:', error);
@@ -138,8 +138,8 @@ const CreateAsistencia = () => {
     //validar si Asistentes es menor o igual a el cupo del taller
     ListaTalleres.map((Elemento) => {
       if (Elemento.TallerID === Taller) {
-        console.log('Cupo: ' + Elemento.Cupo);
-        console.log('Asistentes: ' + Asistentes);
+        //console.log('Cupo: ' + Elemento.Cupo);
+        //console.log('Asistentes: ' + Asistentes);
         if (Asistentes > Elemento.Cupo) {
           Swal.fire({
             icon: 'error',

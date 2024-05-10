@@ -51,7 +51,7 @@ const CreateConsultaPsicologia2 = () => {
     if (UID === null) {
       navigate("/Login");
   }
-  console.log(Rol);
+  //console.log(Rol);
   if (Rol !== 'Psicología') {
    //navegar a pagina de falta de permisos
       navigate("/PageNotFound");

@@ -58,7 +58,6 @@ input{
     justify-content: start;
     align-items: center;
     text-align: center;
-    background: none;
     
   }
   
@@ -72,6 +71,7 @@ input{
     align-items: center;
     /* Opcional: alinear verticalmente los elementos */
     margin-right: 5rem;
+    
   }
   
   #Option {
@@ -207,7 +207,7 @@ input{
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: start;
+      justify-content: center;
       align-items: center;
       text-align: center;
       background: #d6d6d6;

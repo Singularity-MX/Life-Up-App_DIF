@@ -24,7 +24,7 @@ const ViewTaller = () => {
     
      // Obtener el objeto de usuario enviado a través de las props de estado
      const taller = location.state;
-     console.log(taller);
+     //console.log(taller);
 
     const [talleres, setTalleres] = useState([]);
     const navigate = useNavigate();
@@ -102,7 +102,7 @@ const ViewTaller = () => {
         if (UID === null) {
             navigate("/Login");
         }
-        console.log(Rol);
+        //console.log(Rol);
         if (Rol !== 'Administrador') {
          //navegar a pagina de falta de permisos
             navigate("/PageNotFound");
@@ -119,9 +119,9 @@ const ViewTaller = () => {
                 });
 
                 if (response.status === 200) {
-                    console.log(response.data);
-                    setTalleres(response.data);
                     //console.log(response.data);
+                    setTalleres(response.data);
+                    ////console.log(response.data);
                 } else {
                     console.error('Error al obtener los datos de usuarios');
                 }

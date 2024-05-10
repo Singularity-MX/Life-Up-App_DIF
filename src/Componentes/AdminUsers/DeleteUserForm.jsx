@@ -134,7 +134,7 @@ const DeleteUser = () => {
     axios.post(backendUrl + '/api/DeleteUser', requestData)
       .then(response => {
         // Manejar la respuesta del servidor si es necesario
-        console.log(response.data);
+        //console.log(response.data);
         if (response.status === 200) {
           AlertaTimer('success', 'Completado', 'Se ha eliminado correctamente', 1500);
 

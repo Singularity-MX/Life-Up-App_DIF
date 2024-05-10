@@ -96,7 +96,7 @@ const RegistrarAsistencia = () => {
 
     function handleSelectChange(event) {
         setSelectedValue(event.target.value); // Actualiza el estado con el valor seleccionado
-        console.log(selectedValue);
+        //console.log(selectedValue);
         //alert(selectedValue);
     }
 
